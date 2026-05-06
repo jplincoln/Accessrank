@@ -823,6 +823,131 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; bor
 
 
 /* ==================================================================
+   7b. SEO / AI SEARCH SECTION
+   ================================================================== */
+.seo-strip {
+  padding: 64px 28px 72px;
+  max-width: 1180px;
+  margin: 0 auto;
+  border-top: 1px solid var(--hairline);
+}
+
+.seo-eyebrow {
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--brand);
+  font-weight: 500;
+  margin-bottom: 12px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.seo-title {
+  font-size: 38px;
+  line-height: 1.1;
+  letter-spacing: -1px;
+  font-weight: 800;
+  margin: 0 auto 18px;
+  color: var(--text);
+  text-align: center;
+  max-width: 720px;
+}
+
+.seo-title .accent { color: var(--brand); }
+
+.seo-sub {
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--text-soft);
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 40px;
+}
+
+.seo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  max-width: 980px;
+  margin: 0 auto 28px;
+}
+
+.seo-card {
+  padding: 26px 24px;
+  background: var(--surface);
+  border-radius: 12px;
+  border: 1px solid var(--hairline);
+  display: flex;
+  flex-direction: column;
+}
+
+.seo-card-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(255, 210, 63, 0.10);
+  border: 1px solid rgba(255, 210, 63, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--brand);
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.seo-card-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 8px;
+  letter-spacing: -0.3px;
+}
+
+.seo-card-body {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--text-soft);
+  margin: 0 0 14px;
+  flex: 1;
+}
+
+.seo-card-tier {
+  font-size: 10px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--text-fainter);
+  font-weight: 500;
+  padding-top: 12px;
+  border-top: 1px solid var(--hairline);
+}
+
+.seo-card-tier .tier-label { color: var(--brand); }
+
+.seo-closer {
+  text-align: center;
+  font-weight: 700;
+  font-size: 36px;
+  letter-spacing: -0.8px;
+  line-height: 1.2;
+  color: var(--text);
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.seo-closer .white { color: #FFFFFF; }
+.seo-closer .blue  { color: var(--stakes-accent); }
+
+.seo-closer .accent { color: var(--brand); font-style: italic; }
+
+@media (max-width: 768px) {
+  .seo-grid { grid-template-columns: 1fr; }
+  .seo-title { font-size: 30px; }
+  .seo-strip { padding: 48px 20px 56px; }
+}
+
+
+/* ==================================================================
    8. WCAG 2.2 EXPLAINER
    ================================================================== */
 .wcag-section {
@@ -1677,6 +1802,52 @@ body.animations-ready [data-animate].in-view {
   </section>
 
   <!-- ============================================================== -->
+  <!-- SEO / AI SEARCH — integrated services                            -->
+  <!-- ============================================================== -->
+  <section class="seo-strip" id="seo">
+    <div class="seo-eyebrow">SEO / AI SEO SERVICES</div>
+    <h2 class="seo-title"><span class="accent">Rank</span> is in our name for a reason.</h2>
+    <p class="seo-sub">
+      Accessibility fixes the foundation. Optimized SEO and AI search make your storefront work a lot harder.
+      Every fix that makes your site readable to a screen reader makes it more legible to Google and AI search, too —
+      and we've spent the last 10 years honing our on-page, off-page, and now AI search chops.
+      It's in our DNA.
+    </p>
+
+    <div class="seo-grid">
+      <div class="seo-card">
+        <div class="seo-card-icon" aria-hidden="true">◐</div>
+        <div class="seo-card-title">On-page SEO</div>
+        <p class="seo-card-body">
+          Semantic HTML, heading hierarchy, internal linking, metadata, schema markup. The structural cues
+          that screen readers depend on — exactly the cues Google's crawler rewards.
+        </p>
+        <div class="seo-card-tier">Included in <span class="tier-label">Growth</span></div>
+      </div>
+      <div class="seo-card">
+        <div class="seo-card-icon" aria-hidden="true">◑</div>
+        <div class="seo-card-title">Technical SEO</div>
+        <p class="seo-card-body">
+          Core Web Vitals, crawlability, sitemap optimization, indexation health, mobile responsiveness.
+          The engineering work that turns audit-passing into top-ranking.
+        </p>
+        <div class="seo-card-tier">Included in <span class="tier-label">Growth</span></div>
+      </div>
+      <div class="seo-card">
+        <div class="seo-card-icon" aria-hidden="true">◉</div>
+        <div class="seo-card-title">Off-page + AI search</div>
+        <p class="seo-card-body">
+          Authority building, content distribution, and content optimized for AI search across ChatGPT, Perplexity,
+          Claude, and Google AI Overviews — where your future customers are already searching.
+        </p>
+        <div class="seo-card-tier">Included in <span class="tier-label">Scale</span></div>
+      </div>
+    </div>
+
+    <p class="seo-closer"><span class="white">Compliance keeps the lawyers away.</span><br><span class="blue">Rank brings the customers in.</span></p>
+  </section>
+
+  <!-- ============================================================== -->
   <!-- OVERLAY WARNING                                                  -->
   <!-- ============================================================== -->
   <div class="overlay-warning">
@@ -1818,7 +1989,7 @@ body.animations-ready [data-animate].in-view {
           <li>Mid-stage — up to 500 pages</li>
           <li>Weekly audits + alerts</li>
           <li>One-click source-code fixes</li>
-          <li>SEO rank tracker</li>
+          <li>On-page + technical SEO</li>
           <li>EAA + ADA legal letter</li>
           <li>3 user seats</li>
         </ul>
@@ -1831,6 +2002,7 @@ body.animations-ready [data-animate].in-view {
         <ul class="price-features">
           <li>Catalog-heavy — up to 5,000 pages</li>
           <li>Daily audits + alerts</li>
+          <li>Off-page SEO + AI search optimization</li>
           <li>Dedicated CSM</li>
           <li>Shopify Plus optimizations</li>
           <li>Custom integrations</li>
