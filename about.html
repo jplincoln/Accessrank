@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Accessrank</title>
+  <meta name="description" content="The team behind Accessrank — accessibility, SEO, and source-code remediation for DTC ecommerce." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
+
+  <!-- Reuse the parent site's CSS so brand stays consistent -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    /* ==================================================================
+       ABOUT-PAGE-SPECIFIC STYLES
+       Layered on top of styles.css. Reuses tokens (--brand, --surface,
+       --hairline, etc.) and matches the parent site's spacing system
+       (1180px max-width, 28px page padding, 14px grid gaps).
+       ================================================================== */
+
+    .about-hero {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 80px 28px 56px;
+      text-align: center;
+    }
+    .about-hero .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--brand);
+      font-weight: 600;
+      margin-bottom: 22px;
+    }
+    .about-hero .eyebrow .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--brand);
+    }
+    .about-hero h1 {
+      font-size: 56px;
+      line-height: 1.05;
+      letter-spacing: -1.8px;
+      font-weight: 800;
+      margin: 0 0 22px;
+      color: var(--text);
+    }
+    .about-hero h1 .accent { color: var(--brand); }
+    .about-hero .lead {
+      font-size: 18px;
+      line-height: 1.55;
+      color: var(--text-soft);
+      max-width: 720px;
+      margin: 0 auto 18px;
+      text-align: left;
+    }
+    .about-hero .lead:last-of-type { margin-bottom: 0; }
+    .about-hero .lead strong { color: var(--text); font-weight: 600; }
+    .about-hero .lead-emphasis {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.3px;
+      margin-top: 28px;
+      text-align: center;
+    }
+    .about-hero .lead-emphasis .accent { color: var(--brand); }
+
+    /* === Section eyebrows === */
+    .about-section {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 28px 28px 56px;
+    }
+    .about-section-head {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .about-section-eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--brand);
+      font-weight: 600;
+      margin-bottom: 14px;
+      padding: 4px 10px;
+      background: var(--brand-soft);
+      border: 1px solid var(--brand-border);
+      border-radius: 4px;
+    }
+    .about-section h2 {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      color: var(--text);
+      margin: 0 0 12px;
+    }
+    .about-section .section-sub {
+      font-size: 15px;
+      color: var(--text-soft);
+      max-width: 580px;
+      margin: 0 auto;
+      line-height: 1.55;
+    }
+
+    /* === FOUNDERS — two large cards side by side === */
+    /* === FOUNDERS — two cards side by side === */
+    .founders-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .founder-card {
+      background: var(--surface);
+      border-radius: 14px;
+      padding: 36px;
+      border: 1px solid var(--hairline);
+    }
+    .founder-head {
+      margin-bottom: 22px;
+    }
+    .founder-name {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      margin: 0 0 4px;
+    }
+    .founder-title {
+      font-size: 13px;
+      color: var(--brand);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .founder-bio {
+      font-size: 14px;
+      color: var(--text-soft);
+      line-height: 1.65;
+      margin: 0;
+    }
+    .founder-bio + .founder-bio { margin-top: 14px; }
+
+    /* === Smaller team cards (3 in a row) === */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .team-card {
+      background: var(--surface);
+      border-radius: 12px;
+      padding: 24px;
+      border: 1px solid var(--hairline);
+    }
+    .team-head {
+      margin-bottom: 14px;
+    }
+    .team-name {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: var(--text);
+      margin: 0 0 2px;
+    }
+    .team-title {
+      font-size: 12px;
+      color: var(--brand);
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+    .team-bio {
+      font-size: 13px;
+      color: var(--text-soft);
+      line-height: 1.55;
+      margin: 0;
+    }
+    .team-cert {
+      display: inline-block;
+      font-size: 9px;
+      letter-spacing: 1.5px;
+      color: var(--brand);
+      font-weight: 700;
+      background: var(--brand-soft);
+      border: 1px solid var(--brand-border);
+      padding: 3px 8px;
+      border-radius: 4px;
+      margin-top: 10px;
+    }
+
+    /* === Closing CTA === */
+    .about-cta-band {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 28px 28px 80px;
+      text-align: center;
+    }
+    .about-cta-card {
+      background: var(--surface);
+      border-radius: 14px;
+      padding: 48px 28px;
+      border: 1px solid var(--hairline);
+    }
+    .about-cta-card h2 {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      color: var(--text);
+      margin: 0 0 12px;
+    }
+    .about-cta-card h2 .accent { color: var(--brand); }
+    .about-cta-card p {
+      font-size: 15px;
+      color: var(--text-soft);
+      max-width: 540px;
+      margin: 0 auto 24px;
+      line-height: 1.55;
+    }
+    .about-cta-row {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+    .about-cta-primary {
+      background: var(--brand);
+      color: var(--bg);
+      padding: 13px 22px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 13px;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .about-cta-secondary {
+      background: transparent;
+      color: var(--text);
+      padding: 13px 22px;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 13px;
+      border: 1px solid rgba(255,255,255,0.4);
+      font-family: inherit;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    /* === CONTACT FORM === */
+    .contact-form {
+      max-width: 540px;
+      margin: 0 auto;
+      text-align: left;
+    }
+    .form-row {
+      margin-bottom: 10px;
+    }
+    .form-row-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .form-row-split .form-col { margin-bottom: 0; }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      box-sizing: border-box;
+      background: #000000;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: var(--brand);
+      padding: 13px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      font-family: inherit;
+      transition: border-color 0.18s ease, background 0.18s ease;
+    }
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder {
+      color: rgba(255, 210, 63, 0.45);
+      font-weight: 400;
+    }
+    .contact-form input:hover,
+    .contact-form textarea:hover {
+      border-color: rgba(255, 255, 255, 0.28);
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: var(--brand);
+      background: #000000;
+    }
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 110px;
+      font-family: inherit;
+    }
+
+    .form-actions {
+      margin-top: 20px;
+      margin-bottom: 0;
+    }
+    .form-submit {
+      width: 100%;
+      background: var(--brand);
+      color: var(--bg);
+      padding: 16px 28px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.3px;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: transform 0.15s ease, box-shadow 0.18s ease, background 0.15s ease;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    }
+    .form-submit-arrow {
+      display: inline-block;
+      transition: transform 0.18s ease;
+    }
+    .form-submit:hover {
+      background: #FFDC5C;
+      box-shadow: 0 6px 16px rgba(255, 210, 63, 0.25);
+    }
+    .form-submit:hover .form-submit-arrow {
+      transform: translateX(3px);
+    }
+    .form-submit:active {
+      transform: translateY(1px);
+    }
+
+    /* Visually-hidden labels for screen readers (placeholders are not labels) */
+    .sr-only {
+      position: absolute;
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,0,0);
+      white-space: nowrap; border: 0;
+    }
+
+    /* === Responsive === */
+    @media (max-width: 900px) {
+      .about-hero { padding: 56px 20px 36px; }
+      .about-hero h1 { font-size: 38px; letter-spacing: -1.4px; }
+      .about-hero .lead { font-size: 16px; }
+      .team-grid { grid-template-columns: 1fr; }
+      .founders-grid { grid-template-columns: 1fr; }
+      .founder-card { padding: 28px; }
+      .about-section { padding: 28px 20px 36px; }
+      .about-cta-band { padding: 28px 20px 56px; }
+      .form-row-split { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================== -->
+  <!-- NAVIGATION (mirrors the main site)                             -->
+  <!-- ============================================================== -->
+  <nav class="nav">
+    <a href="index.html" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <span class="layer layer-red" aria-hidden="true"></span>
+        <span class="layer layer-green" aria-hidden="true"></span>
+        <span class="layer layer-yellow" aria-hidden="true"></span>
+        <span class="icon icon-yellow" aria-hidden="true">
+          <svg viewBox="0 0 14 14"><path d="M3 7 L6 10 L11 4" fill="none" stroke="#0E0E10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <span class="icon icon-red" aria-hidden="true">
+          <svg viewBox="0 0 14 14"><path d="M5.4 3 L8.6 3 L7.8 9 L6.2 9 Z" fill="#FFFFFF"/><circle cx="7" cy="11.4" r="1.6" fill="#FFFFFF"/></svg>
+        </span>
+        <span class="icon icon-green" aria-hidden="true">
+          <svg viewBox="0 0 14 14"><path d="M3 7 L6 10 L11 4" fill="none" stroke="#0E0E10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <span class="swipe swipe-1" aria-hidden="true"></span>
+        <span class="swipe swipe-2" aria-hidden="true"></span>
+        <span class="swipe swipe-3" aria-hidden="true"></span>
+      </span>
+      Accessrank
+    </a>
+    <div class="nav-right">
+      <a href="index.html#product">Product</a>
+      <a href="index.html#wcag">WCAG explained</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="about.html" aria-current="page">About</a>
+      <a href="#">Log in</a>
+      <a href="index.html#audit-card" class="cta-nav">Free audit</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span class="ham-line"></span>
+      <span class="ham-line"></span>
+      <span class="ham-line"></span>
+    </button>
+    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+      <a href="index.html#product">Product</a>
+      <a href="index.html#wcag">WCAG explained</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="about.html">About</a>
+      <a href="#">Log in</a>
+      <a href="index.html">Home</a>
+    </div>
+  </nav>
+
+  <!-- ============================================================== -->
+  <!-- HERO / ORIGIN STORY                                             -->
+  <!-- ============================================================== -->
+  <section class="about-hero">
+    <div class="eyebrow"><span class="dot"></span>ORIGIN STORY</div>
+    <p class="lead">
+      JP Lincoln, the founder of Crier Communications — a Los Angeles public relations, social media, and website development agency — has worked with a Lima, Peru-based software and SEO development team led by Carlos Maruffo for nearly two decades. When one of Crier's clients got hit with a predatory compliance lawsuit, Carlos and his team sprang into action, pushing that client's accessibility score high enough to discourage any future lawyers from looking their way again.
+    </p>
+    <p class="lead">
+      In the process, they discovered the velocity of ADA lawsuits being filed nationwide is truly staggering, with <strong>over 95% of websites unusable</strong> to people with visual, hearing, mobility, or cognitive impairments — that's 1 in 4 Americans living with a disability. Beyond business-crushing lawsuits — everyone should have easy access to what the web has to offer.
+    </p>
+    <p class="lead">
+      ADA-compliant websites also rank higher than non-compliant ones. Which makes sense: if a page is fully readable by a blind patron using assistive software, Google and AI searches can read it too. <strong>Access and ranking go together.</strong>
+    </p>
+    <p class="lead lead-emphasis">
+      That was the aha moment that led to <span class="accent">Accessrank.</span>
+    </p>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- FOUNDERS                                                        -->
+  <!-- ============================================================== -->
+  <section class="about-section">
+    <div class="about-section-head">
+      <span class="about-section-eyebrow">FOUNDERS</span>
+    </div>
+
+    <div class="founders-grid">
+
+      <article class="founder-card">
+        <div class="founder-head">
+          <div>
+            <h3 class="founder-name">JP Lincoln</h3>
+            <div class="founder-title">CO-FOUNDER &amp; CEO</div>
+          </div>
+        </div>
+        <p class="founder-bio">
+          Prior to co-founding Accessrank, JP founded PR, social media and design agency Crier Communications in 1998, serving clients in CPG, tech, and wellness. Previous posts include account supervisor for the Phelps Group ad agency, and VP for PR agency Murphy O'Brien's tech practice. He holds a BA in Journalism from SMU.
+        </p>
+      </article>
+
+      <article class="founder-card">
+        <div class="founder-head">
+          <div>
+            <h3 class="founder-name">Carlos Maruffo</h3>
+            <div class="founder-title">CO-FOUNDER &amp; CTO</div>
+          </div>
+        </div>
+        <p class="founder-bio">
+          Prior to co-founding Accessrank, Carlos led full-stack development and SEO from Lima, Peru, for clients including Mars, ExpoPass, and the Miami Public Library. At Accessrank, he built the source-code audit engine and leads the LATAM engineering team. He holds a degree in Computer Science from Universidad Nacional de Ingeniería.
+        </p>
+      </article>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================== -->
+  <!-- LEADERSHIP TEAM                                                 -->
+  <!-- ============================================================== -->
+  <section class="about-section">
+    <div class="about-section-head">
+      <span class="about-section-eyebrow">LEADERSHIP</span>
+      <h2>The team running the business.</h2>
+      <p class="section-sub">Marketing, partnerships, and operations — the work that turns a product into a company.</p>
+    </div>
+
+    <div class="team-grid">
+
+      <article class="team-card">
+        <div class="team-head">
+          <div>
+            <h4 class="team-name">Misty Lamb</h4>
+            <div class="team-title">CHIEF MARKETING OFFICER</div>
+          </div>
+        </div>
+        <p class="team-bio">
+          Misty served as Crier Communications' social media manager and owns brand, content, and demand generation — and is unapologetically allergic to vague compliance jargon.
+        </p>
+      </article>
+
+      <article class="team-card">
+        <div class="team-head">
+          <div>
+            <h4 class="team-name">David Chen</h4>
+            <div class="team-title">HEAD OF BUSINESS DEVELOPMENT</div>
+          </div>
+        </div>
+        <p class="team-bio">
+          David runs partnerships with Shopify, BigCommerce, and the agency network that brings Accessrank to mid-market brands. Eight years in ecommerce SaaS partnerships before joining the founding team.
+        </p>
+      </article>
+
+      <article class="team-card">
+        <div class="team-head">
+          <div>
+            <h4 class="team-name">Katie Cycan</h4>
+            <div class="team-title">OPERATIONS MANAGER</div>
+          </div>
+        </div>
+        <p class="team-bio">
+          Katie keeps the company running — finance, HR, customer success operations, and the unglamorous infrastructure that lets everyone else move fast. She served as Vice President at Crier Communications before joining the founding team.
+        </p>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- ENGINEERING & COMPLIANCE                                        -->
+  <!-- ============================================================== -->
+  <section class="about-section">
+    <div class="about-section-head">
+      <span class="about-section-eyebrow">ENGINEERING &amp; COMPLIANCE</span>
+      <h2>The team building the product.</h2>
+      <p class="section-sub">Source-code remediation isn't a magic widget. It's careful engineering by people who know the standards inside out.</p>
+    </div>
+
+    <div class="team-grid">
+
+      <article class="team-card">
+        <div class="team-head">
+          <div>
+            <h4 class="team-name">Arturo Maruffo</h4>
+            <div class="team-title">LEAD ENGINEER</div>
+          </div>
+        </div>
+        <p class="team-bio">
+          Arturo leads platform engineering — the audit engine, the rules pipeline, and the integrations with Shopify, BigCommerce, and WooCommerce. Previously a staff engineer at a developer tooling startup acquired in 2024.
+        </p>
+      </article>
+
+      <article class="team-card">
+        <div class="team-head">
+          <div>
+            <h4 class="team-name">Emerson Jara</h4>
+            <div class="team-title">SENIOR ENGINEER</div>
+          </div>
+        </div>
+        <p class="team-bio">
+          Emerson owns the source-code remediation tooling — the part that turns audit findings into pull requests your developers can actually merge. Background in compiler engineering and developer experience.
+        </p>
+      </article>
+
+      <article class="team-card">
+        <div class="team-head">
+          <div>
+            <h4 class="team-name">Jordan Bell</h4>
+            <div class="team-title">COMPLIANCE OFFICER</div>
+          </div>
+        </div>
+        <p class="team-bio">
+          Jordan is the firm's resident WCAG and ADA specialist — every audit goes through their review before going to a customer. They lead manual accessibility testing using assistive technology.
+        </p>
+        <span class="team-cert">IAAP CPACC CERTIFIED</span>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- CONTACT FORM                                                    -->
+  <!-- ============================================================== -->
+  <section class="about-cta-band">
+    <div class="about-cta-card">
+      <h2>Want to <span class="accent">work with us?</span></h2>
+      <p>We're hiring engineers and customer success leads. We're also always interested in talking to ecommerce founders who've felt the pain of overlay-widget compliance theater.</p>
+
+      <form class="contact-form" id="contact-form" novalidate>
+        <div class="form-row">
+          <label for="contact-name" class="sr-only">Name</label>
+          <input type="text" id="contact-name" name="name" placeholder="Name" required />
+        </div>
+        <div class="form-row form-row-split">
+          <div class="form-col">
+            <label for="contact-website" class="sr-only">Website</label>
+            <input type="url" id="contact-website" name="website" placeholder="Website" />
+          </div>
+          <div class="form-col">
+            <label for="contact-email" class="sr-only">Email address</label>
+            <input type="email" id="contact-email" name="email" placeholder="Email address" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <label for="contact-phone" class="sr-only">Phone</label>
+          <input type="tel" id="contact-phone" name="phone" placeholder="Phone" />
+        </div>
+        <div class="form-row">
+          <label for="contact-message" class="sr-only">Tell us a little about your project needs</label>
+          <textarea id="contact-message" name="message" rows="4" placeholder="Tell us a little about your project needs" required></textarea>
+        </div>
+        <div class="form-row form-actions">
+          <button type="submit" class="form-submit">
+            Send
+            <span class="form-submit-arrow" aria-hidden="true">→</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- FOOTER                                                           -->
+  <!-- ============================================================== -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="logo">
+        <span class="logo-mark" aria-hidden="true">
+          <span class="layer layer-red" aria-hidden="true"></span>
+          <span class="layer layer-green" aria-hidden="true"></span>
+          <span class="layer layer-yellow" aria-hidden="true"></span>
+          <span class="icon icon-yellow" aria-hidden="true">
+            <svg viewBox="0 0 14 14"><path d="M3 7 L6 10 L11 4" fill="none" stroke="#0E0E10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="icon icon-red" aria-hidden="true">
+            <svg viewBox="0 0 14 14"><path d="M5.4 3 L8.6 3 L7.8 9 L6.2 9 Z" fill="#FFFFFF"/><circle cx="7" cy="11.4" r="1.6" fill="#FFFFFF"/></svg>
+          </span>
+          <span class="icon icon-green" aria-hidden="true">
+            <svg viewBox="0 0 14 14"><path d="M3 7 L6 10 L11 4" fill="none" stroke="#0E0E10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="swipe swipe-1" aria-hidden="true"></span>
+          <span class="swipe swipe-2" aria-hidden="true"></span>
+          <span class="swipe swipe-3" aria-hidden="true"></span>
+        </span>
+        Accessrank
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>PRODUCT</h4>
+          <a href="index.html#product">Platform</a><a href="index.html">Integrations</a><a href="index.html">Changelog</a>
+        </div>
+        <div class="footer-col">
+          <h4>COMPANY</h4>
+          <a href="about.html">About</a><a href="#">Customers</a><a href="#">Careers</a>
+        </div>
+        <div class="footer-col">
+          <h4>RESOURCES</h4>
+          <a href="index.html#wcag">WCAG 2.2 explained</a><a href="index.html">EAA &amp; ADA guide</a><a href="index.html">Blog</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Accessrank, Inc.</span>
+    </div>
+  </footer>
+
+  <!-- ============================================================== -->
+  <!-- MOBILE-MENU + CONTACT FORM SCRIPT                              -->
+  <!-- ============================================================== -->
+  <script>
+    /* Mobile menu toggle */
+    (function () {
+      const hamburger = document.getElementById('hamburger');
+      const menu = document.getElementById('mobile-menu');
+      if (!hamburger || !menu) return;
+      hamburger.addEventListener('click', function () {
+        const isOpen = menu.getAttribute('aria-hidden') === 'false';
+        menu.setAttribute('aria-hidden', isOpen ? 'true' : 'false');
+        hamburger.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+        menu.style.display = isOpen ? 'none' : 'flex';
+      });
+    })();
+
+    /* Contact form — replace this handler with a real backend call.
+       Right now it prevents the default submission, validates required
+       fields, and replaces the form with a thank-you message. */
+    (function () {
+      const form = document.getElementById('contact-form');
+      if (!form) return;
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        // Collect values for the eventual backend submission
+        const data = {
+          name:    form.name.value.trim(),
+          website: form.website.value.trim(),
+          email:   form.email.value.trim(),
+          phone:   form.phone.value.trim(),
+          message: form.message.value.trim()
+        };
+
+        // Basic required-field check
+        if (!data.name || !data.email || !data.message) {
+          alert('Please fill in your name, email, and a brief message.');
+          return;
+        }
+
+        // TODO: replace with your real submission endpoint
+        // fetch('/api/contact', { method: 'POST', body: JSON.stringify(data), ... })
+
+        // Replace the form with a thank-you state
+        form.innerHTML =
+          '<div style="text-align:center; padding:32px 0;">' +
+            '<div style="font-size:36px; margin-bottom:14px;">✓</div>' +
+            '<h3 style="font-size:20px; font-weight:700; color:#FFFFFF; margin:0 0 8px;">Thanks — we\'ll be in touch.</h3>' +
+            '<p style="font-size:14px; color:#D4D0C5; margin:0;">We typically respond within one business day.</p>' +
+          '</div>';
+      });
+    })();
+  </script>
+
+</body>
+</html>
