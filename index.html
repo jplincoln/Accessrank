@@ -749,7 +749,7 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; bor
    7. RISK STRIP
    ================================================================== */
 .risk-strip {
-  padding: 56px 28px;
+  padding: 40px 28px 56px;
   border-bottom: 1px solid rgba(240, 237, 229, 0.06);
   max-width: 1180px;
   margin: 0 auto;
@@ -765,14 +765,14 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; bor
 }
 
 .risk-title {
-  font-size: 38px;
+  font-size: 40px;
   line-height: 1.1;
   letter-spacing: -1px;
   font-weight: 800;
   margin: 0 auto 36px;
   color: var(--text);
   text-align: center;
-  max-width: 720px;
+  max-width: 760px;
 }
 
 .risk-title .red { color: var(--stakes-accent); }
@@ -826,10 +826,9 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; bor
    7b. SEO / AI SEARCH SECTION
    ================================================================== */
 .seo-strip {
-  padding: 64px 28px 72px;
+  padding: 36px 28px 72px;
   max-width: 1180px;
   margin: 0 auto;
-  border-top: 1px solid var(--hairline);
 }
 
 .seo-eyebrow {
@@ -951,7 +950,7 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; bor
    8. WCAG 2.2 EXPLAINER
    ================================================================== */
 .wcag-section {
-  padding: 64px 28px;
+  padding: 64px 28px 36px;
   max-width: 1180px;
   margin: 0 auto;
 }
@@ -1463,7 +1462,7 @@ h2 {
    ================================================================== */
 .footer {
   padding: 32px 28px 24px;
-  border-top: 1px solid var(--hairline-strong);
+  border-top: 1px solid #4A4A4D;
   max-width: 1180px;
   margin: 0 auto;
 }
@@ -1502,8 +1501,9 @@ h2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 16px;
-  border-top: 1px solid var(--hairline);
+  margin: 0 -28px;
+  padding: 16px 28px 0;
+  border-top: 1px solid #4A4A4D;
   font-size: 11px;
   color: var(--text-faint);
 }
@@ -1630,7 +1630,6 @@ body.animations-ready [data-animate].in-view {
   <!-- THE STAKES — risk strip                                          -->
   <!-- ============================================================== -->
   <section class="risk-strip">
-    <div class="risk-eyebrow">THE STAKES</div>
     <h2 class="risk-title">Selling online without ADA compliance is a <span class="red">lawsuit waiting to happen.</span></h2>
     <div class="risk-grid">
       <div class="risk-card">
