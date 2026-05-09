@@ -5,1584 +5,149 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Accessrank — WCAG 2.2 Accessibility Audits for DTC Ecommerce</title>
   <meta name="description" content="Accessrank fixes WCAG 2.2 accessibility violations at the source code level — protecting DTC stores from ADA litigation and boosting SEO rankings." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://accessrank.com/" />
+  <meta name="theme-color" content="#0E0E10" />
+
+  <!-- Open Graph -->
   <meta property="og:title" content="Accessrank — Higher rank. Wider reach." />
   <meta property="og:description" content="We make predatory lawyers look elsewhere — and give your SEO and AI rankings the boost they need for your business to thrive." />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://accessrank.com/" />
+  <meta property="og:image" content="https://accessrank.com/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Accessrank" />
 
-  <!-- Fonts -->
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Accessrank — Higher rank. Wider reach." />
+  <meta name="twitter:description" content="WCAG 2.2 accessibility audits that protect DTC stores from ADA lawsuits and boost SEO rankings." />
+  <meta name="twitter:image" content="https://accessrank.com/og-image.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+  <!-- Fonts — preload to avoid render blocking -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet" />
-
-  <style>
-/* ==================================================================
-   ACCESSRANK — STYLES
-   ==================================================================
-   Sections (Cmd/Ctrl+F to jump):
-     1. DESIGN TOKENS  — colors, type, spacing variables
-     2. RESET / BASE
-     3. NAV + MOBILE MENU
-     4. HERO
-     5. AUDIT CARD (live audit widget)
-     6. MARQUEE (scrolling platform list)
-     7. RISK STRIP ("The stakes")
-     8. WCAG 2.2 EXPLAINER
-     9. OVERLAY WARNING
-    10. FEATURES ("How it works")
-    11. STATS STRIP
-    12. TESTIMONIAL
-    13. PRICING
-    14. FOOTER
-    15. RESPONSIVE
-    16. SCROLL-TRIGGERED FADE-IN
-   ================================================================== */
-
-
-/* ==================================================================
-   1. DESIGN TOKENS
-   ================================================================== */
-:root {
-  --brand:           #FFD23F;
-  --brand-soft:      rgba(255, 210, 63, 0.12);
-  --brand-border:    rgba(255, 210, 63, 0.30);
-  --warning:         #FF6B47;
-  --warning-soft:    #FF8B6E;
-  --stakes-accent:   #3B82F6;
-
-  --bg:              #0E0E10;
-  --surface:         #1A1A1D;
-  --text:            #FFFFFF;
-  --text-soft:       #D4D0C5;
-  --text-muted:      #B5B0A4;
-  --text-faint:      #9A9590;
-  --text-fainter:    #6B6760;
-  --hairline:        rgba(240, 237, 229, 0.14);
-  --hairline-strong: rgba(240, 237, 229, 0.18);
-
-  --h1-size:         48px;
-  --h2-size:         36px;
-  --body-size:       16px;
-  --caption-size:    11px;
-
-  --ease-out:        cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-
-/* ==================================================================
-   2. RESET / BASE
-   ================================================================== */
-* { box-sizing: border-box; }
-
-html { scroll-behavior: smooth; }
-
-body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background: var(--bg);
-  color: var(--text-soft);
-  margin: 0;
-  border-radius: 12px;
-  overflow-x: hidden;
-  position: relative;
-  isolation: isolate;
-}
-
-/* ──────────────────────────────────────────────────────────────────
-   ANIMATED GRADIENT BACKGROUND LAYERS
-   Two pseudo-elements layered behind all page content. Each holds
-   multiple radial-gradient "blobs" that drift slowly on independent
-   timing cycles. Six blobs total, distributed across upper and lower
-   halves, including a dark red accent that ties to the warning red
-   used elsewhere on the site.
-   Honors prefers-reduced-motion (real WCAG 2.2 concern).
-   ────────────────────────────────────────────────────────────────── */
-body::before,
-body::after {
-  content: '';
-  position: fixed;
-  inset: -10%;
-  pointer-events: none;
-  z-index: -1;
-}
-
-body::before {
-  background:
-    /* Center-left navy */
-    radial-gradient(800px circle at 30% 30%,
-      rgba(28, 50, 100, 0.55) 0%,
-      rgba(28, 50, 100, 0) 55%),
-    /* Center-right red — primary red presence */
-    radial-gradient(700px circle at 70% 65%,
-      rgba(110, 30, 35, 0.50) 0%,
-      rgba(110, 30, 35, 0) 60%),
-    /* Upper-right teal */
-    radial-gradient(600px circle at 75% 25%,
-      rgba(20, 70, 90, 0.40) 0%,
-      rgba(20, 70, 90, 0) 60%);
-  animation: blob-drift-1 18s ease-in-out infinite alternate;
-}
-
-body::after {
-  background:
-    /* Lower-center red — secondary red presence */
-    radial-gradient(750px circle at 45% 80%,
-      rgba(90, 28, 35, 0.42) 0%,
-      rgba(90, 28, 35, 0) 60%),
-    /* Lower-right eggplant */
-    radial-gradient(700px circle at 85% 90%,
-      rgba(60, 22, 70, 0.45) 0%,
-      rgba(60, 22, 70, 0) 60%),
-    /* Mid-left slate-blue */
-    radial-gradient(600px circle at 20% 55%,
-      rgba(40, 50, 90, 0.40) 0%,
-      rgba(40, 50, 90, 0) 60%);
-  animation: blob-drift-2 22s ease-in-out infinite alternate;
-}
-
-@keyframes blob-drift-1 {
-  0%   { transform: translate(-15%, -10%) scale(1);    }
-  50%  { transform: translate(20%, 12%)   scale(1.15); }
-  100% { transform: translate(-8%, 18%)   scale(0.95); }
-}
-
-@keyframes blob-drift-2 {
-  0%   { transform: translate(15%, 10%)   scale(1);    }
-  33%  { transform: translate(-22%, -8%)  scale(1.12); }
-  66%  { transform: translate(18%, 15%)   scale(0.95); }
-  100% { transform: translate(-12%, -15%) scale(1.08); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  body::before,
-  body::after { animation: none; }
-}
-
-a { text-decoration: none; }
-button { font-family: inherit; cursor: pointer; border: none; background: transparent; }
-button:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; border-radius: 4px; }
-
-
-/* ==================================================================
-   3. NAV + MOBILE MENU
-   ================================================================== */
-.nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 18px 28px;
-  border-bottom: 1px solid var(--hairline-strong);
-  max-width: 1180px;
-  margin: 0 auto;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 800;
-  font-size: 19px;
-  letter-spacing: -0.5px;
-  color: var(--text);
-}
-
-/* ==================================================================
-   LOGO MARK ANIMATION
-   ================================================================== */
-.logo-mark {
-  width: 24px;
-  height: 24px;
-  border-radius: 6px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-  background: var(--brand);
-  flex-shrink: 0;
-}
-
-.logo-mark .layer {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-}
-.logo-mark .layer-red {
-  background: #E0432B;
-  transform: translate(-110%, 110%);
-  animation: logoWipeRed 5s ease-in-out 1 forwards;
-}
-.logo-mark .layer-green {
-  background: #4ADE80;
-  transform: translate(110%, -110%);
-  animation: logoWipeGreen 5s ease-in-out 1 forwards;
-}
-.logo-mark .layer-yellow {
-  background: var(--brand);
-  transform: translate(-110%, 110%);
-  animation: logoWipeYellowReturn 5s ease-in-out 1 forwards;
-}
-
-.logo-mark .icon {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-  pointer-events: none;
-}
-.logo-mark .icon svg {
-  width: 58%;
-  height: 58%;
-  display: block;
-}
-.logo-mark .icon-yellow { animation: logoIconYellow 5s ease-in-out 1 forwards; }
-.logo-mark .icon-red    { opacity: 0; animation: logoIconRed   5s ease-in-out 1 forwards; }
-.logo-mark .icon-green  { opacity: 0; animation: logoIconGreen 5s ease-in-out 1 forwards; transform-origin: 50% 50%; }
-
-.logo-mark .swipe {
-  position: absolute;
-  top: -50%; left: -150%;
-  width: 200%; height: 200%;
-  pointer-events: none;
-  z-index: 4;
-  filter: blur(0.5px);
-  opacity: 0;
-}
-.logo-mark .swipe-1,
-.logo-mark .swipe-3 {
-  background: linear-gradient(45deg,  transparent 45%, rgba(255,255,255,0.85) 50%, transparent 55%);
-}
-.logo-mark .swipe-2 {
-  background: linear-gradient(-45deg, transparent 45%, rgba(255,255,255,0.85) 50%, transparent 55%);
-}
-.logo-mark .swipe-1 { animation: logoSwipe1 5s ease-in-out 1 forwards; }
-.logo-mark .swipe-2 { animation: logoSwipe2 5s ease-in-out 1 forwards; }
-.logo-mark .swipe-3 { animation: logoSwipe3 5s ease-in-out 1 forwards; }
-
-@keyframes logoWipeRed {
-  0%, 13%   { transform: translate(-110%, 110%); }
-  22%, 40%  { transform: translate(0, 0); }
-  48%, 100% { transform: translate(110%, -110%); }
-}
-@keyframes logoWipeGreen {
-  0%, 38%   { transform: translate(110%, -110%); }
-  47%, 70%  { transform: translate(0, 0); }
-  77%, 100% { transform: translate(-110%, 110%); }
-}
-@keyframes logoWipeYellowReturn {
-  0%, 68%   { transform: translate(-110%, 110%); }
-  77%, 100% { transform: translate(0, 0); }
-}
-@keyframes logoIconYellow {
-  0%, 18%   { opacity: 1; }
-  22%, 72%  { opacity: 0; }
-  82%, 100% { opacity: 1; }
-}
-@keyframes logoIconRed {
-  0%, 18%   { opacity: 0; }
-  25%, 38%  { opacity: 1; }
-  44%, 100% { opacity: 0; }
-}
-@keyframes logoIconGreen {
-  0%, 43%   { opacity: 0; transform: scale(1); }
-  50%       { opacity: 1; transform: scale(1); }
-  56%       { opacity: 1; transform: scale(1); }
-  63%       { opacity: 1; transform: scale(1.42); }
-  68%       { opacity: 1; transform: scale(0.96); }
-  72%       { opacity: 1; transform: scale(1); }
-  78%, 100% { opacity: 0; transform: scale(1); }
-}
-@keyframes logoSwipe1 {
-  0%, 11%   { transform: translate(-50%, 50%);  opacity: 0; }
-  13%       { transform: translate(-50%, 50%);  opacity: 1; }
-  21%       { transform: translate(50%, -50%);  opacity: 1; }
-  23%, 100% { opacity: 0; }
-}
-@keyframes logoSwipe2 {
-  0%, 38%   { transform: translate(50%, -50%);  opacity: 0; }
-  40%       { transform: translate(50%, -50%);  opacity: 1; }
-  46%       { transform: translate(-50%, 50%);  opacity: 1; }
-  48%, 100% { opacity: 0; }
-}
-@keyframes logoSwipe3 {
-  0%, 68%   { transform: translate(-50%, 50%);  opacity: 0; }
-  70%       { transform: translate(-50%, 50%);  opacity: 1; }
-  76%       { transform: translate(50%, -50%);  opacity: 1; }
-  78%, 100% { opacity: 0; }
-}
-
-.nav-right {
-  display: flex;
-  gap: 22px;
-  align-items: center;
-  font-size: 13px;
-}
-
-.nav-right a:not(.cta-nav) {
-  color: var(--text-soft);
-  transition: color 0.15s;
-}
-
-.nav-right a:not(.cta-nav):hover { color: var(--text); }
-
-.cta-nav {
-  background: var(--brand);
-  color: var(--bg);
-  padding: 8px 14px;
-  border-radius: 6px;
-  font-weight: 500;
-  font-size: 12px;
-  transition: opacity 0.15s ease;
-}
-
-.cta-nav:hover { opacity: 0.85; }
-
-.hamburger {
-  display: none;
-  flex-direction: column;
-  gap: 4px;
-  padding: 8px;
-}
-
-.ham-line {
-  width: 22px;
-  height: 2px;
-  background: var(--text);
-  border-radius: 2px;
-  transition: transform 0.2s, opacity 0.2s;
-}
-
-.hamburger[aria-expanded="true"] .ham-line:nth-child(1) {
-  transform: translateY(6px) rotate(45deg);
-}
-.hamburger[aria-expanded="true"] .ham-line:nth-child(2) { opacity: 0; }
-.hamburger[aria-expanded="true"] .ham-line:nth-child(3) {
-  transform: translateY(-6px) rotate(-45deg);
-}
-
-.mobile-menu {
-  display: none;
-  flex-direction: column;
-  gap: 0;
-  position: absolute;
-  top: 60px;
-  left: 0;
-  right: 0;
-  background: var(--bg);
-  border-bottom: 1px solid var(--hairline-strong);
-  padding: 16px 28px;
-  z-index: 100;
-}
-
-.mobile-menu.open { display: flex; }
-
-.mobile-menu a {
-  color: var(--text-soft);
-  padding: 14px 0;
-  border-bottom: 1px solid var(--hairline);
-  font-size: 15px;
-}
-
-.mobile-menu a:last-child { border-bottom: none; }
-
-.mobile-menu .cta-mobile {
-  background: var(--brand);
-  color: var(--bg);
-  margin-top: 12px;
-  padding: 14px !important;
-  text-align: center;
-  border-radius: 8px;
-  font-weight: 600;
-}
-
-
-/* ==================================================================
-   4. HERO
-   ================================================================== */
-.hero {
-  display: grid;
-  grid-template-columns: 0.75fr 1fr;
-  gap: 18px;
-  padding: 56px 28px 36px;
-  align-items: center;
-  max-width: 1180px;
-  margin: 0 auto;
-}
-
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: var(--caption-size);
-  letter-spacing: 3px;
-  color: var(--brand);
-  font-weight: 500;
-  margin-bottom: 22px;
-}
-
-.pulse-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--brand);
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50%      { opacity: 0.3; }
-}
-
-.hero h1 {
-  font-size: var(--h1-size);
-  line-height: 1.02;
-  letter-spacing: -2px;
-  font-weight: 800;
-  margin: 0 0 22px;
-  color: var(--text);
-}
-
-.hero h1 .accent { color: var(--brand); }
-
-.sub {
-  font-size: var(--body-size);
-  line-height: 1.55;
-  color: var(--text-soft);
-  max-width: 440px;
-  margin: 0 0 22px;
-}
-
-.sub .highlight {
-  color: var(--text);
-  font-weight: 500;
-}
-
-.wcag-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 14px;
-  background: var(--brand-soft);
-  color: #FFFFFF;
-  border: 1px solid var(--brand-border);
-  border-radius: 100px;
-  font-size: 12px;
-  font-weight: 500;
-  margin-bottom: 24px;
-  transition: background 0.2s;
-}
-
-.wcag-link:hover { background: rgba(255, 210, 63, 0.18); }
-
-.info-circle {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  border: 1.5px solid var(--brand);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 9px;
-  font-weight: 700;
-  line-height: 1;
-}
-
-.cta-row {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-.btn-primary {
-  background: var(--brand);
-  color: var(--bg);
-  padding: 13px 22px;
-  border-radius: 8px;
-  font-weight: 500;
-  font-size: 13px;
-  transition: opacity 0.15s ease;
-}
-
-.btn-primary:hover { opacity: 0.85; }
-
-.btn-secondary {
-  background: transparent;
-  color: var(--text);
-  padding: 13px 22px;
-  border-radius: 8px;
-  font-weight: 500;
-  font-size: 13px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  transition: background 0.15s ease, border-color 0.15s ease;
-}
-
-.btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.4);
-}
-
-
-/* ==================================================================
-   5. AUDIT CARD
-   ================================================================== */
-.audit-card {
-  background: var(--surface);
-  border-radius: 14px;
-  padding: 22px;
-  border: 1px solid var(--hairline-strong);
-}
-
-.audit-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 14px;
-}
-
-.audit-title {
-  font-size: 11px;
-  letter-spacing: 3px;
-  color: var(--brand);
-  font-weight: 500;
-}
-
-.audit-meta {
-  font-size: 11px;
-  color: var(--text-faint);
-}
-
-.url-form {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 14px;
-}
-
-.url-input {
-  flex: 1;
-  background: var(--bg);
-  border: 1px solid rgba(240, 237, 229, 0.15);
-  color: var(--text);
-  padding: 11px 14px;
-  border-radius: 8px;
-  font-size: 13px;
-  font-family: inherit;
-  outline: none;
-  transition: border-color 0.15s;
-}
-
-.url-input::placeholder { color: var(--text-fainter); }
-.url-input:focus { border-color: var(--brand); }
-
-.scan-btn {
-  background: var(--brand);
-  color: var(--bg);
-  padding: 11px 16px;
-  border-radius: 8px;
-  font-weight: 500;
-  font-size: 13px;
-  white-space: nowrap;
-  transition: opacity 0.15s;
-}
-
-.scan-btn:hover { opacity: 0.85; }
-.scan-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-
-.scan-status {
-  font-size: 11px;
-  color: var(--text-faint);
-  margin-bottom: 10px;
-  min-height: 14px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.scan-status.active { color: var(--brand); }
-
-.scan-spinner {
-  width: 10px;
-  height: 10px;
-  border: 1.5px solid rgba(255, 210, 63, 0.3);
-  border-top-color: var(--brand);
-  border-radius: 50%;
-  animation: spin 0.7s linear infinite;
-}
-
-@keyframes spin { to { transform: rotate(360deg); } }
-
-.audit-rows {
-  display: flex;
-  flex-direction: column;
-}
-
-.audit-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--hairline);
-  font-size: 13px;
-  opacity: 0;
-  transform: translateY(6px);
-  transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out);
-}
-
-.audit-row.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.audit-row:last-child { border-bottom: none; }
-
-.check-circle {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: var(--brand);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.row-label { color: var(--text); flex: 1; }
-.row-meta  { color: var(--brand); font-size: 12px; font-weight: 500; }
-
-.empty-state {
-  padding: 24px 12px;
-  text-align: center;
-  color: var(--text-faint);
-  font-size: 13px;
-}
-
-.report-cta {
-  margin-top: 16px;
-  padding: 14px;
-  background: transparent;
-  color: var(--text);
-  border: 1px solid var(--text);
-  border-radius: 10px;
-  text-align: center;
-  font-weight: 500;
-  font-size: 14px;
-  width: 100%;
-  font-family: inherit;
-  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
-}
-
-.report-cta:hover,
-.report-cta:focus-visible {
-  background: var(--brand);
-  color: var(--bg);
-  border-color: var(--brand);
-}
-
-/* On hover, the sub-text inverts back to dark-on-yellow */
-.report-cta:hover .report-cta-sub,
-.report-cta:focus-visible .report-cta-sub {
-  color: rgba(14, 14, 16, 0.7);
-}
-
-.report-cta-sub {
-  display: block;
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.7);
-  margin-top: 3px;
-  font-weight: 400;
-}
-
-.check-anim {
-  stroke-dasharray: 16;
-  stroke-dashoffset: 16;
-  animation: drawCheck 0.6s var(--ease-out) forwards;
-}
-
-@keyframes drawCheck {
-  0%       { stroke-dashoffset: 16; }
-  60%, 100% { stroke-dashoffset: 0; }
-}
-
-
-/* ==================================================================
-   6. MARQUEE
-   ================================================================== */
-.marquee {
-  background: linear-gradient(90deg, #3B82F6 0%, #1E3A8A 100%);
-  color: #FFFFFF;
-  padding: 10px 0;
-  overflow: hidden;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.marquee-track {
-  display: flex;
-  gap: 56px;
-  animation: marquee-scroll 28s linear infinite;
-  white-space: nowrap;
-  width: max-content;
-}
-
-.marquee-track .item {
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 4px;
-  display: inline-flex;
-  align-items: center;
-  gap: 56px;
-}
-
-.marquee-track .sep {
-  color: rgba(255, 255, 255, 0.45);
-  opacity: 0.4;
-  font-size: 12px;
-}
-
-@keyframes marquee-scroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-
-
-/* ==================================================================
-   7. RISK STRIP
-   ================================================================== */
-.risk-strip {
-  padding: 40px 28px 56px;
-  border-bottom: 1px solid rgba(240, 237, 229, 0.06);
-  max-width: 1180px;
-  margin: 0 auto;
-}
-
-.risk-eyebrow {
-  font-size: 11px;
-  letter-spacing: 3px;
-  color: var(--brand);
-  font-weight: 500;
-  margin-bottom: 12px;
-  text-align: center;
-}
-
-.risk-title {
-  font-size: 40px;
-  line-height: 1.1;
-  letter-spacing: -1px;
-  font-weight: 800;
-  margin: 0 auto 36px;
-  color: var(--text);
-  text-align: center;
-  max-width: 760px;
-}
-
-.risk-title .red { color: var(--stakes-accent); }
-
-.risk-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  max-width: 920px;
-  margin: 0 auto;
-}
-
-.risk-card {
-  padding: 22px;
-  background: var(--surface);
-  border-radius: 12px;
-  border: 1px solid var(--hairline);
-}
-
-.risk-num {
-  font-size: 38px;
-  font-weight: 800;
-  letter-spacing: -1.5px;
-  color: var(--text);
-  line-height: 1;
-  margin-bottom: 8px;
-}
-
-.risk-num .small {
-  font-size: 18px;
-  color: var(--text-faint);
-  font-weight: 500;
-}
-
-.risk-label {
-  font-size: 12px;
-  color: var(--text-soft);
-  line-height: 1.45;
-  margin-bottom: 8px;
-}
-
-.risk-source {
-  font-size: 10px;
-  color: var(--text-fainter);
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-
-
-/* ==================================================================
-   7b. SEO / AI SEARCH SECTION
-   ================================================================== */
-.seo-strip {
-  padding: 36px 28px 72px;
-  max-width: 1180px;
-  margin: 0 auto;
-}
-
-.seo-eyebrow {
-  font-size: 11px;
-  letter-spacing: 3px;
-  color: var(--brand);
-  font-weight: 500;
-  margin-bottom: 12px;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-.seo-title {
-  font-size: 38px;
-  line-height: 1.1;
-  letter-spacing: -1px;
-  font-weight: 800;
-  margin: 0 auto 18px;
-  color: var(--text);
-  text-align: center;
-  max-width: 720px;
-}
-
-.seo-title .accent { color: var(--brand); }
-
-.seo-sub {
-  font-size: 16px;
-  line-height: 1.55;
-  color: var(--text-soft);
-  text-align: center;
-  max-width: 680px;
-  margin: 0 auto 40px;
-}
-
-.seo-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-  max-width: 980px;
-  margin: 0 auto 28px;
-}
-
-.seo-card {
-  padding: 26px 24px;
-  background: var(--surface);
-  border-radius: 12px;
-  border: 1px solid var(--hairline);
-  display: flex;
-  flex-direction: column;
-}
-
-.seo-card-icon {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  background: rgba(255, 210, 63, 0.10);
-  border: 1px solid rgba(255, 210, 63, 0.22);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--brand);
-  font-size: 14px;
-  font-weight: 700;
-  margin-bottom: 14px;
-}
-
-.seo-card-title {
-  font-size: 17px;
-  font-weight: 700;
-  color: var(--text);
-  margin: 0 0 8px;
-  letter-spacing: -0.3px;
-}
-
-.seo-card-body {
-  font-size: 13.5px;
-  line-height: 1.5;
-  color: var(--text-soft);
-  margin: 0 0 14px;
-  flex: 1;
-}
-
-.seo-card-tier {
-  font-size: 10px;
-  letter-spacing: 1.4px;
-  text-transform: uppercase;
-  color: var(--text-fainter);
-  font-weight: 500;
-  padding-top: 12px;
-  border-top: 1px solid var(--hairline);
-}
-
-.seo-card-tier .tier-label { color: var(--brand); }
-
-.seo-closer {
-  text-align: center;
-  font-weight: 700;
-  font-size: 36px;
-  letter-spacing: -0.8px;
-  line-height: 1.2;
-  color: var(--text);
-  max-width: 760px;
-  margin: 0 auto;
-}
-
-.seo-closer .white { color: #FFFFFF; }
-.seo-closer .blue  { color: var(--stakes-accent); }
-
-.seo-closer .accent { color: var(--brand); font-style: italic; }
-
-@media (max-width: 768px) {
-  .seo-grid { grid-template-columns: 1fr; }
-  .seo-title { font-size: 30px; }
-  .seo-strip { padding: 48px 20px 56px; }
-}
-
-
-/* ==================================================================
-   8. WCAG 2.2 EXPLAINER
-   ================================================================== */
-.wcag-section {
-  padding: 64px 28px 36px;
-  max-width: 1180px;
-  margin: 0 auto;
-}
-
-.section-eyebrow {
-  font-size: 11px;
-  letter-spacing: 3px;
-  color: var(--brand);
-  font-weight: 500;
-  margin-bottom: 12px;
-  text-align: center;
-}
-
-h2 {
-  font-size: var(--h2-size);
-  line-height: 1.1;
-  letter-spacing: -1px;
-  font-weight: 800;
-  margin: 0 0 14px;
-  color: var(--text);
-}
-
-.section-h2-center { text-align: center; }
-
-.section-sub {
-  font-size: 15px;
-  color: var(--text-soft);
-  text-align: center;
-  max-width: 480px;
-  margin: 0 auto 36px;
-  line-height: 1.55;
-}
-
-.wcag-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: start;
-}
-
-.wcag-section h2.section-h2-center {
-  text-align: center;
-  margin-bottom: 14px;
-}
-
-.wcag-lede {
-  font-size: 16px;
-  line-height: 1.55;
-  color: var(--text-soft);
-  margin: 0 0 24px;
-}
-
-.wcag-lede strong {
-  color: var(--text);
-  font-weight: 600;
-}
-
-.pour {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
-  margin-bottom: 20px;
-}
-
-.pour-item {
-  padding: 12px 14px;
-  background: var(--surface);
-  border-radius: 8px;
-  border: 1px solid var(--hairline);
-}
-
-.pour-letter {
-  font-size: 22px;
-  font-weight: 800;
-  color: var(--brand);
-  letter-spacing: -1px;
-  line-height: 1;
-  margin-bottom: 4px;
-}
-
-.pour-name {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text);
-  margin-bottom: 2px;
-}
-
-.pour-desc {
-  font-size: 11px;
-  color: var(--text-faint);
-  line-height: 1.4;
-}
-
-.wcag-meta-row {
-  display: flex;
-  gap: 10px;
-  padding: 14px 16px;
-  background: rgba(255, 210, 63, 0.08);
-  border: 1px solid rgba(255, 210, 63, 0.20);
-  border-radius: 10px;
-}
-
-.icon-box {
-  width: 28px;
-  height: 28px;
-  background: var(--brand);
-  color: var(--bg);
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  font-size: 13px;
-  flex-shrink: 0;
-}
-
-.wcag-meta-text {
-  font-size: 12px;
-  color: var(--text);
-  line-height: 1.4;
-}
-
-.wcag-meta-text strong { color: var(--brand); }
-
-.criteria-list {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.criteria-head {
-  font-size: 15px;
-  letter-spacing: 1.5px;
-  color: var(--stakes-accent);
-  font-weight: 700;
-  margin-bottom: 20px;
-}
-
-.criteria-row {
-  display: grid;
-  grid-template-columns: 80px 1fr 60px;
-  gap: 12px;
-  padding: 12px 14px;
-  background: var(--surface);
-  border-radius: 8px;
-  border: 1px solid rgba(240, 237, 229, 0.06);
-  align-items: center;
-}
-
-.criteria-id {
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 11px;
-  color: var(--brand);
-  font-weight: 600;
-}
-
-.criteria-body {
-  font-size: 13px;
-  color: var(--text);
-  line-height: 1.4;
-}
-
-.criteria-body .desc {
-  display: block;
-  font-size: 11px;
-  color: var(--text-faint);
-  margin-top: 2px;
-  font-weight: 400;
-}
-
-.criteria-freq {
-  font-size: 12px;
-  color: var(--warning);
-  font-weight: 600;
-  text-align: right;
-}
-
-.criteria-freq .small {
-  font-size: 9px;
-  color: var(--text-fainter);
-  display: block;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  font-weight: 500;
-}
-
-
-/* ==================================================================
-   9. OVERLAY WARNING
-   ================================================================== */
-.overlay-warning {
-  padding: 40px 28px;
-  background:
-    repeating-linear-gradient(
-      135deg,
-      #1F1A12 0 24px,
-      #2B2316 24px 48px
-    );
-  border-top: 2px solid var(--brand);
-  border-bottom: 2px solid var(--brand);
-}
-
-.overlay-card {
-  max-width: 720px;
-  margin: 0 auto;
-  display: flex;
-  gap: 18px;
-  align-items: flex-start;
-}
-
-.overlay-icon {
-  width: 36px;
-  height: 36px;
-  background: var(--brand);
-  color: var(--bg);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  font-size: 18px;
-  flex-shrink: 0;
-}
-
-.overlay-content h3 {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--brand);
-  margin: 0 0 6px;
-}
-
-.overlay-content p {
-  font-size: 13px;
-  color: #E8DCC4;
-  line-height: 1.55;
-  margin: 0;
-}
-
-.overlay-content p strong {
-  color: #FFFFFF;
-  font-weight: 700;
-  background: rgba(255, 210, 63, 0.15);
-  padding: 1px 5px;
-  border-radius: 3px;
-}
-
-
-/* ==================================================================
-   10. FEATURES
-   ================================================================== */
-.features {
-  padding: 72px 28px;
-  max-width: 1180px;
-  margin: 0 auto;
-}
-
-.feature-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-}
-
-.feature-card {
-  background: var(--surface);
-  border-radius: 12px;
-  padding: 24px;
-  border: 1px solid var(--hairline);
-}
-
-.feature-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
-  background: var(--brand-soft);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 14px;
-}
-
-.feature-title {
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--text);
-  margin: 0 0 6px;
-}
-
-.feature-desc {
-  font-size: 13px;
-  color: var(--text-muted);
-  line-height: 1.5;
-  margin: 0;
-}
-
-
-/* ==================================================================
-   11. STATS STRIP
-   ================================================================== */
-.stats-strip {
-  padding: 44px 28px;
-  background: var(--surface);
-  border-top: 1px solid var(--hairline);
-  border-bottom: 1px solid var(--hairline);
-}
-
-.stats-strip-inner {
-  max-width: 1180px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-}
-
-.stat { text-align: center; }
-
-.stat-num {
-  font-size: 36px;
-  font-weight: 800;
-  letter-spacing: -1.5px;
-  color: var(--brand);
-  line-height: 1;
-  margin-bottom: 6px;
-}
-
-.stat-label {
-  font-size: 12px;
-  color: var(--text-soft);
-}
-
-
-/* ==================================================================
-   12. TESTIMONIAL
-   ================================================================== */
-.testimonial {
-  padding: 56px 28px 28px;
-  max-width: 1180px;
-  margin: 0 auto;
-}
-
-.accent-yellow { color: var(--brand); }
-.accent-blue { color: var(--stakes-accent); }
-
-.quote-card {
-  background: var(--surface);
-  border-radius: 14px;
-  padding: 32px;
-  border: 1px solid var(--hairline);
-  max-width: 540px;
-  margin: 28px auto 0;
-}
-
-.quote-text {
-  font-size: 19px;
-  line-height: 1.45;
-  color: var(--text);
-  font-weight: 500;
-  letter-spacing: -0.3px;
-  margin: 0 0 18px;
-}
-
-.quote-text .y { color: var(--brand); }
-
-.quote-attr {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.avatar {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: var(--brand);
-  color: var(--bg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 500;
-  font-size: 13px;
-}
-
-.quote-name {
-  font-size: 13px;
-  color: var(--text);
-  font-weight: 500;
-}
-
-.quote-role {
-  font-size: 12px;
-  color: var(--text-faint);
-}
-
-
-/* ==================================================================
-   13. PRICING
-   ================================================================== */
-.pricing {
-  padding: 28px 28px 56px;
-  max-width: 1180px;
-  margin: 0 auto;
-}
-
-.pricing-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-}
-
-/* Tablet — 4 cards become 2x2 (4 across is too cramped under ~960px) */
-@media (max-width: 960px) {
-  .pricing-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
-.price-card {
-  background: var(--surface);
-  border-radius: 12px;
-  padding: 20px;
-  border: 1px solid var(--hairline);
-}
-
-.price-card.featured {
-  border: 2px solid var(--brand);
-}
-
-.price-tier {
-  font-size: 12px;
-  letter-spacing: 2px;
-  color: var(--text-faint);
-  font-weight: 500;
-  margin-bottom: 8px;
-}
-
-.price-tier.featured-tier { color: var(--brand); }
-
-.price-amount {
-  font-size: 30px;
-  font-weight: 800;
-  color: var(--text);
-  letter-spacing: -1px;
-  line-height: 1;
-  margin-bottom: 4px;
-}
-
-.price-amount .per {
-  font-size: 13px;
-  color: var(--text-faint);
-  font-weight: 400;
-  margin-left: 5px;
-}
-
-.price-desc {
-  font-size: 12px;
-  color: var(--text-muted);
-  margin-bottom: 16px;
-  line-height: 1.5;
-}
-
-.price-features {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 16px;
-}
-
-.price-features li {
-  font-size: 12px;
-  color: var(--text-soft);
-  padding: 5px 0 5px 18px;
-  position: relative;
-  line-height: 1.4;
-}
-
-.price-features li::before {
-  content: '✓';
-  position: absolute;
-  left: 0;
-  color: var(--brand);
-  font-weight: 500;
-}
-
-.price-cta {
-  background: transparent;
-  color: var(--text);
-  padding: 11px;
-  border-radius: 8px;
-  font-weight: 500;
-  font-size: 13px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  width: 100%;
-  font-family: inherit;
-  transition: background 0.15s ease;
-}
-
-.price-cta:hover { background: rgba(255, 255, 255, 0.06); }
-
-.price-cta.featured-cta {
-  background: var(--brand);
-  color: var(--bg);
-  border: none;
-}
-
-.price-cta.featured-cta:hover {
-  background: var(--brand);
-  opacity: 0.85;
-}
-
-
-/* ==================================================================
-   14. FOOTER
-   ================================================================== */
-.footer {
-  padding: 32px 28px 24px;
-  border-top: 1px solid #4A4A4D;
-  max-width: 1180px;
-  margin: 0 auto;
-}
-
-.footer-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 24px;
-}
-
-.footer-cols {
-  display: flex;
-  gap: 40px;
-  font-size: 12px;
-}
-
-.footer-col h4 {
-  font-size: 11px;
-  letter-spacing: 2px;
-  color: var(--text-faint);
-  font-weight: 500;
-  margin: 0 0 10px;
-}
-
-.footer-col a {
-  display: block;
-  color: var(--text-soft);
-  padding: 4px 0;
-  transition: color 0.15s ease;
-}
-
-.footer-col a:hover { color: var(--text); }
-
-.footer-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0 -28px;
-  padding: 16px 28px 0;
-  border-top: 1px solid #4A4A4D;
-  font-size: 11px;
-  color: var(--text-faint);
-}
-
-
-/* ==================================================================
-   15. RESPONSIVE
-   ================================================================== */
-@media (max-width: 900px) {
-  .hero { grid-template-columns: 1fr; gap: 28px; padding: 36px 20px 24px; }
-  .hero h1 { font-size: 36px; letter-spacing: -1.5px; }
-
-  .nav-right { display: none; }
-  .hamburger { display: flex; }
-  .nav { position: relative; }
-
-  .risk-grid { grid-template-columns: repeat(2, 1fr); }
-  .risk-title { font-size: 26px; }
-
-  .wcag-grid { grid-template-columns: 1fr; gap: 28px; }
-  .feature-grid { grid-template-columns: 1fr; }
-  .pricing-grid { grid-template-columns: 1fr; }
-
-  .stats-strip { padding: 32px 20px; }
-  .stats-strip-inner { grid-template-columns: 1fr; gap: 24px; }
-
-  .footer-top { flex-direction: column; gap: 24px; }
-  .footer-cols { flex-wrap: wrap; gap: 28px; }
-  .footer-bottom { flex-direction: column; gap: 8px; align-items: flex-start; }
-
-  h2 { font-size: 26px; }
-
-  .features, .pricing, .wcag-section, .testimonial { padding: 40px 20px; }
-  .risk-strip, .marquee { padding-left: 20px; padding-right: 20px; }
-  .marquee { padding: 10px 0; }
-}
-
-
-/* ==================================================================
-   16. SCROLL-TRIGGERED FADE-IN
-   ================================================================== */
-body.animations-ready [data-animate] {
-  opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out);
-}
-
-body.animations-ready [data-animate].in-view {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  body.animations-ready [data-animate] {
-    opacity: 1;
-    transform: none;
-    transition: none;
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600&display=swap" /></noscript>
+
+  <link rel="preload" href="styles.css" as="style" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- JSON-LD structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://accessrank.com/#organization",
+        "name": "Accessrank",
+        "url": "https://accessrank.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://accessrank.com/favicon.svg"
+        },
+        "sameAs": []
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://accessrank.com/#website",
+        "url": "https://accessrank.com/",
+        "name": "Accessrank",
+        "publisher": { "@id": "https://accessrank.com/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://accessrank.com/?s={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://accessrank.com/#webpage",
+        "url": "https://accessrank.com/",
+        "name": "Accessrank — WCAG 2.2 Accessibility Audits for DTC Ecommerce",
+        "description": "Accessrank fixes WCAG 2.2 accessibility violations at the source code level — protecting DTC stores from ADA litigation and boosting SEO rankings.",
+        "isPartOf": { "@id": "https://accessrank.com/#website" },
+        "about": { "@id": "https://accessrank.com/#organization" }
+      },
+      {
+        "@type": "Service",
+        "@id": "https://accessrank.com/#service",
+        "name": "WCAG 2.2 Accessibility Audit & Remediation",
+        "description": "Continuous WCAG 2.2 AA monitoring, source-code remediation, and SEO rank-lift for DTC ecommerce stores.",
+        "provider": { "@id": "https://accessrank.com/#organization" },
+        "areaServed": "Worldwide",
+        "serviceType": "Accessibility Auditing",
+        "offers": [
+          {
+            "@type": "Offer",
+            "name": "Starter",
+            "price": "79",
+            "priceCurrency": "USD",
+            "priceSpecification": { "@type": "UnitPriceSpecification", "billingDuration": "P1M" }
+          },
+          {
+            "@type": "Offer",
+            "name": "Growth",
+            "price": "249",
+            "priceCurrency": "USD",
+            "priceSpecification": { "@type": "UnitPriceSpecification", "billingDuration": "P1M" }
+          },
+          {
+            "@type": "Offer",
+            "name": "Scale",
+            "price": "599",
+            "priceCurrency": "USD",
+            "priceSpecification": { "@type": "UnitPriceSpecification", "billingDuration": "P1M" }
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is WCAG 2.2?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "WCAG 2.2 is the W3C's web accessibility standard — 86 success criteria across four principles: Perceivable, Operable, Understandable, and Robust. Level AA is the legal target referenced by ADA guidance, the European Accessibility Act, and Section 508."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do overlay widgets make my site ADA compliant?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. 25% of accessibility lawsuits in 2024 involved sites running overlay widgets. Overlays don't fix the underlying code. Accessrank fixes the source code directly."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How long does it take to become WCAG 2.2 AA compliant?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Most DTC stores reach WCAG 2.2 AA compliance within 14 days with Accessrank's source-code remediation service."
+            }
+          }
+        ]
+      }
+    ]
   }
-}
-
-/* Scroll reveal (section-level) */
-.reveal {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.reveal.in-view {
-  opacity: 1;
-  transform: none;
-}
-  </style>
+  </script>
 </head>
 <body>
+
+  <!-- Skip navigation for keyboard users -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
 
   <!-- ============================================================== -->
   <!-- NAV                                                              -->
   <!-- ============================================================== -->
-  <nav class="nav">
+  <nav class="nav" aria-label="Main navigation">
     <div class="logo">
       <span class="logo-mark" aria-hidden="true">
         <span class="layer layer-red" aria-hidden="true"></span>
@@ -1611,20 +176,109 @@ body.animations-ready [data-animate].in-view {
       <a href="#">Log in</a>
       <a href="#audit-card" class="cta-nav">Free audit</a>
     </div>
-    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
       <span class="ham-line"></span>
       <span class="ham-line"></span>
       <span class="ham-line"></span>
     </button>
-    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  </nav>
+
+  <!-- Full-screen mobile menu (outside nav so it covers full viewport) -->
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu" aria-hidden="true">
+    <div class="mm-header">
+      <div class="logo" aria-hidden="true">
+        <span class="logo-mark">
+          <span class="layer layer-red"></span>
+          <span class="layer layer-green"></span>
+          <span class="layer layer-yellow"></span>
+          <span class="icon icon-yellow">
+            <svg viewBox="0 0 14 14"><path d="M3 7 L6 10 L11 4" fill="none" stroke="#0E0E10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="icon icon-red">
+            <svg viewBox="0 0 14 14"><path d="M5.4 3 L8.6 3 L7.8 9 L6.2 9 Z" fill="#FFFFFF"/><circle cx="7" cy="11.4" r="1.6" fill="#FFFFFF"/></svg>
+          </span>
+          <span class="icon icon-green">
+            <svg viewBox="0 0 14 14"><path d="M3 7 L6 10 L11 4" fill="none" stroke="#0E0E10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="swipe swipe-1"></span>
+          <span class="swipe swipe-2"></span>
+          <span class="swipe swipe-3"></span>
+        </span>
+        Accessrank
+      </div>
+      <button class="mm-close" id="mm-close" aria-label="Close menu">
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <nav class="mm-nav" aria-label="Mobile navigation">
       <a href="#product">Product</a>
       <a href="#wcag">WCAG explained</a>
       <a href="#pricing">Pricing</a>
       <a href="about.html">About</a>
       <a href="#">Log in</a>
-      <a href="#audit-card" class="cta-mobile">Free audit →</a>
+    </nav>
+    <div class="mm-footer">
+      <a href="#audit-card" class="mm-cta">Get a free audit →</a>
+      <p class="mm-tagline">WCAG 2.2 AA · Source-code fixes · 14 days</p>
     </div>
-  </nav>
+  </div>
+
+  <main id="main-content">
+
+  <!-- ============================================================== -->
+  <!-- HERO                                                             -->
+  <!-- ============================================================== -->
+  <section class="hero">
+    <div class="hero-copy">
+      <div class="eyebrow"><span class="pulse-dot" aria-hidden="true"></span>BUILT FOR DTC ECOMMERCE</div>
+      <h1>Higher rank.<br/>Wider <span class="accent">reach.</span></h1>
+      <p class="sub">
+        We make predatory lawyers <span class="highlight">look elsewhere</span> —
+        and give your SEO and AI rankings the boost they need for your business to thrive.
+      </p>
+      <button class="wcag-link" id="wcag-link">
+        <span class="info-circle" aria-hidden="true">i</span>
+        <span>WCAG 2.2 compliance explained</span>
+        <span style="opacity: 0.6;" aria-hidden="true">→</span>
+      </button>
+      <div class="cta-row">
+        <a href="#audit-card" class="btn-primary">Get my score →</a>
+        <a href="#audit-card" class="btn-secondary">See live demo</a>
+      </div>
+    </div>
+
+    <!-- Live audit widget -->
+    <div class="audit-card" id="audit-card">
+      <div class="audit-head">
+        <span class="audit-title">LIVE AUDIT</span>
+        <span class="audit-meta" id="audit-meta">enter URL to begin</span>
+      </div>
+      <div class="url-form">
+        <input type="text" class="url-input" id="audit-url" placeholder="yourstore.com" aria-label="Website URL" />
+        <button class="scan-btn" id="audit-scan">Scan →</button>
+      </div>
+      <div class="scan-status" id="audit-status"></div>
+      <div class="audit-rows" id="audit-rows">
+        <div class="empty-state" id="audit-empty">Try it — enter any DTC store URL above.</div>
+      </div>
+      <button class="report-cta" id="audit-report">
+        Get the full report →
+        <span class="report-cta-sub">28-page PDF · sent to your inbox</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- MARQUEE — scrolling platform list                                -->
+  <!-- ============================================================== -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span class="item">SHOPIFY <span class="sep">●</span> WORDPRESS <span class="sep">●</span> WOOCOMMERCE <span class="sep">●</span> BIGCOMMERCE <span class="sep">●</span> CUSTOM <span class="sep">●</span></span>
+      <span class="item">SHOPIFY <span class="sep">●</span> WORDPRESS <span class="sep">●</span> WOOCOMMERCE <span class="sep">●</span> BIGCOMMERCE <span class="sep">●</span> CUSTOM <span class="sep">●</span></span>
+      <span class="item">SHOPIFY <span class="sep">●</span> WORDPRESS <span class="sep">●</span> WOOCOMMERCE <span class="sep">●</span> BIGCOMMERCE <span class="sep">●</span> CUSTOM <span class="sep">●</span></span>
+    </div>
+  </div>
 
   <!-- ============================================================== -->
   <!-- THE STAKES — risk strip                                          -->
@@ -1652,60 +306,6 @@ body.animations-ready [data-animate].in-view {
         <div class="risk-label">of websites fail basic WCAG 2.2 standards — most of your competitors are exposed too.</div>
         <div class="risk-source">— WebAIM Million 2025</div>
       </div>
-    </div>
-  </section>
-
-  <!-- ============================================================== -->
-  <!-- MARQUEE — scrolling platform list                                -->
-  <!-- ============================================================== -->
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee-track">
-      <span class="item">SHOPIFY <span class="sep">●</span> WORDPRESS <span class="sep">●</span> WOOCOMMERCE <span class="sep">●</span> BIGCOMMERCE <span class="sep">●</span> CUSTOM <span class="sep">●</span></span>
-      <span class="item">SHOPIFY <span class="sep">●</span> WORDPRESS <span class="sep">●</span> WOOCOMMERCE <span class="sep">●</span> BIGCOMMERCE <span class="sep">●</span> CUSTOM <span class="sep">●</span></span>
-      <span class="item">SHOPIFY <span class="sep">●</span> WORDPRESS <span class="sep">●</span> WOOCOMMERCE <span class="sep">●</span> BIGCOMMERCE <span class="sep">●</span> CUSTOM <span class="sep">●</span></span>
-    </div>
-  </div>
-
-  <!-- ============================================================== -->
-  <!-- HERO                                                             -->
-  <!-- ============================================================== -->
-  <section class="hero">
-    <div class="hero-copy">
-      <div class="eyebrow"><span class="pulse-dot" aria-hidden="true"></span>BUILT FOR DTC ECOMMERCE</div>
-      <h1>Higher rank.<br/>Wider <span class="accent">reach.</span></h1>
-      <p class="sub">
-        We make predatory lawyers <span class="highlight">look elsewhere</span> —
-        and give your SEO and AI rankings the boost they need for your business to thrive.
-      </p>
-      <button class="wcag-link" id="wcag-link">
-        <span class="info-circle" aria-hidden="true">i</span>
-        <span>WCAG 2.2 compliance explained</span>
-        <span style="opacity: 0.6;" aria-hidden="true">→</span>
-      </button>
-      <div class="cta-row">
-        <button class="btn-primary">Get my score →</button>
-        <button class="btn-secondary">See live demo</button>
-      </div>
-    </div>
-
-    <!-- Live audit widget -->
-    <div class="audit-card" id="audit-card">
-      <div class="audit-head">
-        <span class="audit-title">LIVE AUDIT</span>
-        <span class="audit-meta" id="audit-meta">enter URL to begin</span>
-      </div>
-      <div class="url-form">
-        <input type="text" class="url-input" id="audit-url" placeholder="yourstore.com" aria-label="Website URL" />
-        <button class="scan-btn" id="audit-scan">Scan →</button>
-      </div>
-      <div class="scan-status" id="audit-status"></div>
-      <div class="audit-rows" id="audit-rows">
-        <div class="empty-state" id="audit-empty">Try it — enter any DTC store URL above.</div>
-      </div>
-      <button class="report-cta" id="audit-report">
-        Get the full report →
-        <span class="report-cta-sub">28-page PDF · sent to your inbox</span>
-      </button>
     </div>
   </section>
 
@@ -1977,7 +577,7 @@ body.animations-ready [data-animate].in-view {
           <li>Compliance report &amp; VPAT</li>
           <li>Email support</li>
         </ul>
-        <button class="price-cta">Start free trial</button>
+        <button class="price-cta" onclick="window.location.href='about.html#contact'">Start free trial</button>
       </div>
       <div class="price-card featured">
         <div class="price-tier featured-tier">GROWTH · MOST POPULAR</div>
@@ -1991,7 +591,7 @@ body.animations-ready [data-animate].in-view {
           <li>EAA + ADA legal letter</li>
           <li>Live support</li>
         </ul>
-        <button class="price-cta featured-cta">Start free trial</button>
+        <button class="price-cta featured-cta" onclick="window.location.href='about.html#contact'">Start free trial</button>
       </div>
       <div class="price-card">
         <div class="price-tier">SCALE</div>
@@ -2006,7 +606,7 @@ body.animations-ready [data-animate].in-view {
           <li>Custom integrations</li>
           <li>Live support</li>
         </ul>
-        <button class="price-cta">Start free trial</button>
+        <button class="price-cta" onclick="window.location.href='about.html#contact'">Start free trial</button>
       </div>
       <div class="price-card">
         <div class="price-tier">ENTERPRISE</div>
@@ -2022,7 +622,7 @@ body.animations-ready [data-animate].in-view {
           <li>Named CSM</li>
           <li>Live support</li>
         </ul>
-        <button class="price-cta">Talk to sales</button>
+        <button class="price-cta" onclick="window.location.href='about.html#contact'">Talk to sales</button>
       </div>
     </div>
   </section>
@@ -2034,35 +634,35 @@ body.animations-ready [data-animate].in-view {
     <div class="footer-top">
       <div class="logo">
         <span class="logo-mark" aria-hidden="true">
-        <span class="layer layer-red" aria-hidden="true"></span>
-        <span class="layer layer-green" aria-hidden="true"></span>
-        <span class="layer layer-yellow" aria-hidden="true"></span>
-        <span class="icon icon-yellow" aria-hidden="true">
-          <svg viewBox="0 0 14 14"><path d="M3 7 L6 10 L11 4" fill="none" stroke="#0E0E10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="layer layer-red" aria-hidden="true"></span>
+          <span class="layer layer-green" aria-hidden="true"></span>
+          <span class="layer layer-yellow" aria-hidden="true"></span>
+          <span class="icon icon-yellow" aria-hidden="true">
+            <svg viewBox="0 0 14 14"><path d="M3 7 L6 10 L11 4" fill="none" stroke="#0E0E10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="icon icon-red" aria-hidden="true">
+            <svg viewBox="0 0 14 14"><path d="M5.4 3 L8.6 3 L7.8 9 L6.2 9 Z" fill="#FFFFFF"/><circle cx="7" cy="11.4" r="1.6" fill="#FFFFFF"/></svg>
+          </span>
+          <span class="icon icon-green" aria-hidden="true">
+            <svg viewBox="0 0 14 14"><path d="M3 7 L6 10 L11 4" fill="none" stroke="#0E0E10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="swipe swipe-1" aria-hidden="true"></span>
+          <span class="swipe swipe-2" aria-hidden="true"></span>
+          <span class="swipe swipe-3" aria-hidden="true"></span>
         </span>
-        <span class="icon icon-red" aria-hidden="true">
-          <svg viewBox="0 0 14 14"><path d="M5.4 3 L8.6 3 L7.8 9 L6.2 9 Z" fill="#FFFFFF"/><circle cx="7" cy="11.4" r="1.6" fill="#FFFFFF"/></svg>
-        </span>
-        <span class="icon icon-green" aria-hidden="true">
-          <svg viewBox="0 0 14 14"><path d="M3 7 L6 10 L11 4" fill="none" stroke="#0E0E10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
-        <span class="swipe swipe-1" aria-hidden="true"></span>
-        <span class="swipe swipe-2" aria-hidden="true"></span>
-        <span class="swipe swipe-3" aria-hidden="true"></span>
-      </span>
         Accessrank
       </div>
       <div class="footer-cols">
         <div class="footer-col">
-          <h4>PRODUCT</h4>
+          <p class="footer-col-head">PRODUCT</p>
           <a href="#">Platform</a><a href="#">Integrations</a><a href="#">Changelog</a>
         </div>
         <div class="footer-col">
-          <h4>COMPANY</h4>
+          <p class="footer-col-head">COMPANY</p>
           <a href="about.html">About</a><a href="#">Customers</a><a href="#">Careers</a>
         </div>
         <div class="footer-col">
-          <h4>RESOURCES</h4>
+          <p class="footer-col-head">RESOURCES</p>
           <a href="#wcag" id="wcag-footer">WCAG 2.2 explained</a><a href="#">EAA &amp; ADA guide</a><a href="#">Blog</a>
         </div>
       </div>
@@ -2071,6 +671,8 @@ body.animations-ready [data-animate].in-view {
       <span>© 2026 Accessrank, Inc.</span>
     </div>
   </footer>
+
+  </main>
 
   <script>
 /* ==================================================================
@@ -2140,12 +742,12 @@ const CONFIG = {
 
     let statusIdx = 0;
     statusEl.classList.add('active');
-    statusEl.innerHTML = `<span class="scan-spinner"></span><span>${CONFIG.scanStatuses[0]}</span>`;
+    statusEl.innerHTML = '<span class="scan-spinner"></span><span>' + CONFIG.scanStatuses[0] + '</span>';
 
     const statusTimer = setInterval(function () {
       statusIdx++;
       if (statusIdx < CONFIG.scanStatuses.length) {
-        statusEl.innerHTML = `<span class="scan-spinner"></span><span>${CONFIG.scanStatuses[statusIdx]}</span>`;
+        statusEl.innerHTML = '<span class="scan-spinner"></span><span>' + CONFIG.scanStatuses[statusIdx] + '</span>';
       }
     }, CONFIG.statusCycleMs);
 
@@ -2153,17 +755,16 @@ const CONFIG = {
       setTimeout(function () {
         const row = document.createElement('div');
         row.className = 'audit-row';
-        row.innerHTML = `
-          <span class="check-circle">
-            <svg width="11" height="11" viewBox="0 0 11 11" aria-hidden="true">
-              <path class="check-anim" d="M2 5.5 L4.5 8 L9 3"
-                fill="none" stroke="#0E0E10" stroke-width="1.6"
-                stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </span>
-          <span class="row-label">${item.label}</span>
-          <span class="row-meta">${item.meta}</span>
-        `;
+        row.innerHTML =
+          '<span class="check-circle">' +
+            '<svg width="11" height="11" viewBox="0 0 11 11" aria-hidden="true">' +
+              '<path class="check-anim" d="M2 5.5 L4.5 8 L9 3"' +
+                ' fill="none" stroke="#0E0E10" stroke-width="1.6"' +
+                ' stroke-linecap="round" stroke-linejoin="round"/>' +
+            '</svg>' +
+          '</span>' +
+          '<span class="row-label">' + item.label + '</span>' +
+          '<span class="row-meta">' + item.meta + '</span>';
         rowsEl.appendChild(row);
         requestAnimationFrame(function () { row.classList.add('visible'); });
       }, CONFIG.initialDelayMs + i * CONFIG.rowStaggerMs);
@@ -2180,7 +781,7 @@ const CONFIG = {
         return acc + n;
       }, 0);
 
-      statusEl.innerHTML = `<span style="color: #FFD23F;">●</span><span>scan complete · ${total} issues found</span>`;
+      statusEl.innerHTML = '<span style="color: #FFD23F;">●</span><span>scan complete · ' + total + ' issues found</span>';
 
       isScanning = false;
       scanBtn.disabled = false;
@@ -2194,7 +795,7 @@ const CONFIG = {
   });
 
   reportBtn.addEventListener('click', function () {
-    alert('Report generation goes here. Hook this up to your backend.');
+    window.location.href = 'about.html#contact';
   });
 
   setTimeout(function () {
@@ -2207,26 +808,43 @@ const CONFIG = {
 
 
 /* ------------------------------------------------------------------
-   MOBILE MENU TOGGLE
+   MOBILE MENU
    ------------------------------------------------------------------ */
 (function initMobileMenu() {
   const hamburger = document.getElementById('hamburger');
   const menu      = document.getElementById('mobile-menu');
+  const closeBtn  = document.getElementById('mm-close');
 
   if (!hamburger || !menu) return;
 
-  hamburger.addEventListener('click', function () {
-    const open = menu.classList.toggle('open');
-    hamburger.setAttribute('aria-expanded', String(open));
-    menu.setAttribute('aria-hidden', String(!open));
-  });
+  function openMenu() {
+    menu.classList.add('open');
+    menu.setAttribute('aria-hidden', 'false');
+    hamburger.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('menu-open');
+    if (closeBtn) closeBtn.focus();
+  }
+
+  function closeMenu() {
+    menu.classList.remove('open');
+    menu.setAttribute('aria-hidden', 'true');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('menu-open');
+    hamburger.focus();
+  }
+
+  hamburger.addEventListener('click', openMenu);
+
+  if (closeBtn) closeBtn.addEventListener('click', closeMenu);
 
   menu.querySelectorAll('a').forEach(function (link) {
-    link.addEventListener('click', function () {
-      menu.classList.remove('open');
-      hamburger.setAttribute('aria-expanded', 'false');
-      menu.setAttribute('aria-hidden', 'true');
-    });
+    link.addEventListener('click', closeMenu);
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && menu.classList.contains('open')) {
+      closeMenu();
+    }
   });
 })();
 

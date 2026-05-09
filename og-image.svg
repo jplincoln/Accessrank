@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <radialGradient id="blob1" cx="85%" cy="15%" r="50%">
+      <stop offset="0%" stop-color="#1C3264" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#0E0E10" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="blob2" cx="15%" cy="85%" r="55%">
+      <stop offset="0%" stop-color="#5A1C23" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#0E0E10" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#0E0E10"/>
+  <!-- Gradient blobs -->
+  <rect width="1200" height="630" fill="url(#blob1)"/>
+  <rect width="1200" height="630" fill="url(#blob2)"/>
+
+  <!-- Logo mark -->
+  <rect x="80" y="72" width="52" height="52" rx="11" fill="#FFD23F"/>
+  <path d="M93 98 L101 108 L118 84" fill="none" stroke="#0E0E10" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Wordmark -->
+  <text x="148" y="114" font-family="Inter, Arial, sans-serif" font-weight="800" font-size="36" fill="#FFFFFF" letter-spacing="-0.5">Accessrank</text>
+
+  <!-- Headline -->
+  <text x="80" y="260" font-family="Inter, Arial, sans-serif" font-weight="800" font-size="86" fill="#FFFFFF" letter-spacing="-3">Higher rank.</text>
+  <text x="80" y="360" font-family="Inter, Arial, sans-serif" font-weight="800" font-size="86" fill="#FFD23F" letter-spacing="-3">Wider reach.</text>
+
+  <!-- Sub-tagline -->
+  <text x="80" y="440" font-family="Inter, Arial, sans-serif" font-weight="400" font-size="28" fill="#888480">WCAG 2.2 AA · ADA compliance · SEO rank-lift for DTC ecommerce</text>
+
+  <!-- Bottom divider + URL -->
+  <line x1="80" y1="520" x2="1120" y2="520" stroke="#2A2A2E" stroke-width="1"/>
+  <text x="80" y="568" font-family="Inter, Arial, sans-serif" font-weight="500" font-size="22" fill="#888480">accessrank.com</text>
+</svg>

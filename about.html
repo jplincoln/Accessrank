@@ -5,14 +5,72 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About — Accessrank</title>
   <meta name="description" content="The team behind Accessrank — accessibility, SEO, and source-code remediation for DTC ecommerce." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://accessrank.com/about.html" />
+  <meta name="theme-color" content="#0E0E10" />
 
-  <!-- Fonts -->
+  <!-- Open Graph -->
+  <meta property="og:title" content="About Accessrank — The team behind WCAG 2.2 compliance for DTC ecommerce" />
+  <meta property="og:description" content="The team behind Accessrank — accessibility, SEO, and source-code remediation for DTC ecommerce." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://accessrank.com/about.html" />
+  <meta property="og:image" content="https://accessrank.com/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Accessrank" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="About Accessrank — WCAG 2.2 compliance for DTC ecommerce" />
+  <meta name="twitter:description" content="The team behind Accessrank — accessibility, SEO, and source-code remediation for DTC ecommerce." />
+  <meta name="twitter:image" content="https://accessrank.com/og-image.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+  <!-- Fonts — preload to avoid render blocking -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" /></noscript>
 
   <!-- Reuse the parent site's CSS so brand stays consistent -->
+  <link rel="preload" href="styles.css" as="style" />
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- JSON-LD structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://accessrank.com/#organization",
+        "name": "Accessrank",
+        "url": "https://accessrank.com/",
+        "logo": { "@type": "ImageObject", "url": "https://accessrank.com/favicon.svg" },
+        "employee": [
+          { "@type": "Person", "name": "JP Lincoln", "jobTitle": "Co-Founder & CEO" },
+          { "@type": "Person", "name": "Carlos Maruffo", "jobTitle": "Co-Founder & CTO" },
+          { "@type": "Person", "name": "Misty Lamb", "jobTitle": "Chief Marketing Officer" },
+          { "@type": "Person", "name": "David Chen", "jobTitle": "Head of Business Development" },
+          { "@type": "Person", "name": "Katie Cycan", "jobTitle": "Operations Manager" },
+          { "@type": "Person", "name": "Arturo Maruffo", "jobTitle": "Lead Engineer" },
+          { "@type": "Person", "name": "Emerson Jara", "jobTitle": "Senior Engineer" },
+          { "@type": "Person", "name": "Jordan Bell", "jobTitle": "Compliance Officer" }
+        ]
+      },
+      {
+        "@type": "AboutPage",
+        "@id": "https://accessrank.com/about.html#webpage",
+        "url": "https://accessrank.com/about.html",
+        "name": "About Accessrank — The team behind WCAG 2.2 compliance for DTC ecommerce",
+        "description": "The team behind Accessrank — accessibility, SEO, and source-code remediation for DTC ecommerce.",
+        "about": { "@id": "https://accessrank.com/#organization" }
+      }
+    ]
+  }
+  </script>
 
   <style>
     /* ==================================================================
@@ -110,7 +168,6 @@
     }
 
     /* === FOUNDERS — two large cards side by side === */
-    /* === FOUNDERS — two cards side by side === */
     .founders-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -284,7 +341,7 @@
     }
     .contact-form input::placeholder,
     .contact-form textarea::placeholder {
-      color: rgba(255, 210, 63, 0.45);
+      color: rgba(255, 210, 63, 0.65);
       font-weight: 400;
     }
     .contact-form input:hover,
@@ -366,10 +423,13 @@
 </head>
 <body>
 
+  <!-- Skip navigation for keyboard users -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   <!-- ============================================================== -->
   <!-- NAVIGATION (mirrors the main site)                             -->
   <!-- ============================================================== -->
-  <nav class="nav">
+  <nav class="nav" aria-label="Main navigation">
     <a href="index.html" class="logo">
       <span class="logo-mark" aria-hidden="true">
         <span class="layer layer-red" aria-hidden="true"></span>
@@ -398,26 +458,62 @@
       <a href="#">Log in</a>
       <a href="index.html#audit-card" class="cta-nav">Free audit</a>
     </div>
-    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
       <span class="ham-line"></span>
       <span class="ham-line"></span>
       <span class="ham-line"></span>
     </button>
-    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  </nav>
+
+  <!-- Full-screen mobile menu (outside nav so it covers full viewport) -->
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu" aria-hidden="true">
+    <div class="mm-header">
+      <div class="logo" aria-hidden="true">
+        <span class="logo-mark">
+          <span class="layer layer-red"></span>
+          <span class="layer layer-green"></span>
+          <span class="layer layer-yellow"></span>
+          <span class="icon icon-yellow">
+            <svg viewBox="0 0 14 14"><path d="M3 7 L6 10 L11 4" fill="none" stroke="#0E0E10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="icon icon-red">
+            <svg viewBox="0 0 14 14"><path d="M5.4 3 L8.6 3 L7.8 9 L6.2 9 Z" fill="#FFFFFF"/><circle cx="7" cy="11.4" r="1.6" fill="#FFFFFF"/></svg>
+          </span>
+          <span class="icon icon-green">
+            <svg viewBox="0 0 14 14"><path d="M3 7 L6 10 L11 4" fill="none" stroke="#0E0E10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="swipe swipe-1"></span>
+          <span class="swipe swipe-2"></span>
+          <span class="swipe swipe-3"></span>
+        </span>
+        Accessrank
+      </div>
+      <button class="mm-close" id="mm-close" aria-label="Close menu">
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <nav class="mm-nav" aria-label="Mobile navigation">
       <a href="index.html#product">Product</a>
       <a href="index.html#wcag">WCAG explained</a>
       <a href="index.html#pricing">Pricing</a>
       <a href="about.html">About</a>
       <a href="#">Log in</a>
-      <a href="index.html">Home</a>
+    </nav>
+    <div class="mm-footer">
+      <a href="#contact" class="mm-cta">Get a free audit →</a>
+      <p class="mm-tagline">WCAG 2.2 AA · Source-code fixes · 14 days</p>
     </div>
-  </nav>
+  </div>
+
+  <main id="main-content">
 
   <!-- ============================================================== -->
   <!-- HERO / ORIGIN STORY                                             -->
   <!-- ============================================================== -->
   <section class="about-hero">
     <div class="eyebrow"><span class="dot"></span>ORIGIN STORY</div>
+    <h1>Fix the code.<br/>Own the <span class="accent">rank.</span></h1>
     <p class="lead">
       JP Lincoln, the founder of Crier Communications — a Los Angeles public relations, social media, and website development agency — has worked with a Lima, Peru-based software and SEO development team led by Carlos Maruffo for nearly two decades. When one of Crier's clients got hit with a predatory compliance lawsuit, Carlos and his team sprang into action, pushing that client's accessibility score high enough to discourage any future lawyers from looking their way again.
     </p>
@@ -445,7 +541,7 @@
       <article class="founder-card">
         <div class="founder-head">
           <div>
-            <h3 class="founder-name">JP Lincoln</h3>
+            <h2 class="founder-name">JP Lincoln</h2>
             <div class="founder-title">CO-FOUNDER &amp; CEO</div>
           </div>
         </div>
@@ -457,7 +553,7 @@
       <article class="founder-card">
         <div class="founder-head">
           <div>
-            <h3 class="founder-name">Carlos Maruffo</h3>
+            <h2 class="founder-name">Carlos Maruffo</h2>
             <div class="founder-title">CO-FOUNDER &amp; CTO</div>
           </div>
         </div>
@@ -485,7 +581,7 @@
       <article class="team-card">
         <div class="team-head">
           <div>
-            <h4 class="team-name">Misty Lamb</h4>
+            <h3 class="team-name">Misty Lamb</h3>
             <div class="team-title">CHIEF MARKETING OFFICER</div>
           </div>
         </div>
@@ -497,7 +593,7 @@
       <article class="team-card">
         <div class="team-head">
           <div>
-            <h4 class="team-name">David Chen</h4>
+            <h3 class="team-name">David Chen</h3>
             <div class="team-title">HEAD OF BUSINESS DEVELOPMENT</div>
           </div>
         </div>
@@ -509,7 +605,7 @@
       <article class="team-card">
         <div class="team-head">
           <div>
-            <h4 class="team-name">Katie Cycan</h4>
+            <h3 class="team-name">Katie Cycan</h3>
             <div class="team-title">OPERATIONS MANAGER</div>
           </div>
         </div>
@@ -536,7 +632,7 @@
       <article class="team-card">
         <div class="team-head">
           <div>
-            <h4 class="team-name">Arturo Maruffo</h4>
+            <h3 class="team-name">Arturo Maruffo</h3>
             <div class="team-title">LEAD ENGINEER</div>
           </div>
         </div>
@@ -548,7 +644,7 @@
       <article class="team-card">
         <div class="team-head">
           <div>
-            <h4 class="team-name">Emerson Jara</h4>
+            <h3 class="team-name">Emerson Jara</h3>
             <div class="team-title">SENIOR ENGINEER</div>
           </div>
         </div>
@@ -560,7 +656,7 @@
       <article class="team-card">
         <div class="team-head">
           <div>
-            <h4 class="team-name">Jordan Bell</h4>
+            <h3 class="team-name">Jordan Bell</h3>
             <div class="team-title">COMPLIANCE OFFICER</div>
           </div>
         </div>
@@ -576,12 +672,16 @@
   <!-- ============================================================== -->
   <!-- CONTACT FORM                                                    -->
   <!-- ============================================================== -->
-  <section class="about-cta-band">
+  <section class="about-cta-band" id="contact">
     <div class="about-cta-card">
       <h2>Want higher ranks and <span class="accent">fewer lawyers?</span></h2>
       <p>Tell us about your store and what you're up against. We'll come back within one business day with a free audit and a plan for getting you to WCAG 2.2 AA — without breaking your site or your budget.</p>
 
-      <form class="contact-form" id="contact-form" novalidate>
+      <form class="contact-form" id="contact-form" action="https://formspree.io/f/mjgleepz" method="POST" novalidate>
+        <!-- Hidden fields for Formspree routing -->
+        <input type="hidden" name="_cc" value="jp@crierpr.com" />
+        <input type="hidden" name="_subject" value="New Accessrank inquiry" />
+
         <div class="form-row">
           <label for="contact-name" class="sr-only">Name</label>
           <input type="text" id="contact-name" name="name" placeholder="Name" required />
@@ -641,15 +741,15 @@
       </div>
       <div class="footer-cols">
         <div class="footer-col">
-          <h4>PRODUCT</h4>
+          <p class="footer-col-head">PRODUCT</p>
           <a href="index.html#product">Platform</a><a href="index.html">Integrations</a><a href="index.html">Changelog</a>
         </div>
         <div class="footer-col">
-          <h4>COMPANY</h4>
+          <p class="footer-col-head">COMPANY</p>
           <a href="about.html">About</a><a href="#">Customers</a><a href="#">Careers</a>
         </div>
         <div class="footer-col">
-          <h4>RESOURCES</h4>
+          <p class="footer-col-head">RESOURCES</p>
           <a href="index.html#wcag">WCAG 2.2 explained</a><a href="index.html">EAA &amp; ADA guide</a><a href="index.html">Blog</a>
         </div>
       </div>
@@ -659,6 +759,8 @@
     </div>
   </footer>
 
+  </main>
+
   <!-- ============================================================== -->
   <!-- MOBILE-MENU + CONTACT FORM SCRIPT                              -->
   <!-- ============================================================== -->
@@ -666,19 +768,42 @@
     /* Mobile menu toggle */
     (function () {
       const hamburger = document.getElementById('hamburger');
-      const menu = document.getElementById('mobile-menu');
+      const menu      = document.getElementById('mobile-menu');
+      const closeBtn  = document.getElementById('mm-close');
+
       if (!hamburger || !menu) return;
-      hamburger.addEventListener('click', function () {
-        const isOpen = menu.getAttribute('aria-hidden') === 'false';
-        menu.setAttribute('aria-hidden', isOpen ? 'true' : 'false');
-        hamburger.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
-        menu.style.display = isOpen ? 'none' : 'flex';
+
+      function openMenu() {
+        menu.classList.add('open');
+        menu.setAttribute('aria-hidden', 'false');
+        hamburger.setAttribute('aria-expanded', 'true');
+        document.body.classList.add('menu-open');
+        if (closeBtn) closeBtn.focus();
+      }
+
+      function closeMenu() {
+        menu.classList.remove('open');
+        menu.setAttribute('aria-hidden', 'true');
+        hamburger.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('menu-open');
+        hamburger.focus();
+      }
+
+      hamburger.addEventListener('click', openMenu);
+      if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+
+      menu.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', closeMenu);
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && menu.classList.contains('open')) {
+          closeMenu();
+        }
       });
     })();
 
-    /* Contact form — replace this handler with a real backend call.
-       Right now it prevents the default submission, validates required
-       fields, and replaces the form with a thank-you message. */
+    /* Contact form — Formspree fetch submission */
     (function () {
       const form = document.getElementById('contact-form');
       if (!form) return;
@@ -686,31 +811,43 @@
       form.addEventListener('submit', function (e) {
         e.preventDefault();
 
-        // Collect values for the eventual backend submission
-        const data = {
-          name:    form.name.value.trim(),
-          website: form.website.value.trim(),
-          email:   form.email.value.trim(),
-          phone:   form.phone.value.trim(),
-          message: form.message.value.trim()
-        };
+        const nameVal    = form.querySelector('[name="name"]').value.trim();
+        const emailVal   = form.querySelector('[name="email"]').value.trim();
+        const messageVal = form.querySelector('[name="message"]').value.trim();
 
-        // Basic required-field check
-        if (!data.name || !data.email || !data.message) {
+        if (!nameVal || !emailVal || !messageVal) {
           alert('Please fill in your name, email, and a brief message.');
           return;
         }
 
-        // TODO: replace with your real submission endpoint
-        // fetch('/api/contact', { method: 'POST', body: JSON.stringify(data), ... })
+        const submitBtn = form.querySelector('.form-submit');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Sending… <span class="form-submit-arrow" aria-hidden="true"></span>';
 
-        // Replace the form with a thank-you state
-        form.innerHTML =
-          '<div style="text-align:center; padding:32px 0;">' +
-            '<div style="font-size:36px; margin-bottom:14px;">✓</div>' +
-            '<h3 style="font-size:20px; font-weight:700; color:#FFFFFF; margin:0 0 8px;">Thanks — we\'ll be in touch.</h3>' +
-            '<p style="font-size:14px; color:#D4D0C5; margin:0;">We typically respond within one business day.</p>' +
-          '</div>';
+        const formData = new FormData(form);
+
+        fetch(form.action, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: formData
+        }).then(function (res) {
+          if (res.ok) {
+            form.innerHTML =
+              '<div style="text-align:center; padding:32px 0;">' +
+                '<div style="font-size:36px; margin-bottom:14px;">✓</div>' +
+                '<h3 style="font-size:20px; font-weight:700; color:#FFFFFF; margin:0 0 8px;">Thanks — we\'ll be in touch.</h3>' +
+                '<p style="font-size:14px; color:#D4D0C5; margin:0;">We typically respond within one business day.</p>' +
+              '</div>';
+          } else {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = 'Send <span class="form-submit-arrow" aria-hidden="true">→</span>';
+            alert('Something went wrong. Please try again.');
+          }
+        }).catch(function () {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = 'Send <span class="form-submit-arrow" aria-hidden="true">→</span>';
+          alert('Something went wrong. Please try again.');
+        });
       });
     })();
   </script>
